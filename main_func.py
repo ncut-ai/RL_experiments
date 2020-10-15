@@ -3,7 +3,7 @@ import os
 import traci
 import traci.constants as tc
 #
-from RLAgent import RLAgent
+from RLAgent import RLAgent #Agent类
 ##--------------------------------------------------------------------------------
 ##--------------------------- 基本配置数据&信息 -----------------------------------------------------
 #仿真模型
