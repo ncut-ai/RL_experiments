@@ -4,26 +4,6 @@
 采用强化学习算法进行交通网络信号配时优化，以达到整体最优的控制效果。
 ## 技术框架
 
-## 详细设计
+# 资料
 
-### 路口Agent类
-#### 1. 属性
-
-#### 2. 函数
-```
-getPhaseNum()  
-获得相位个数
-```
-```
-
-```
-```
-
-```
-```
-
-```
-```
-
-```
-
+本书代码包托管在 GitHub上，https://github.com/PacktPublishing/Hands-On-Deep-Learning-with-TensorFlow。另外在 https://github.com/PacktPublishing/上的大量图书和视频目录中还有其他代码包。请查阅！
