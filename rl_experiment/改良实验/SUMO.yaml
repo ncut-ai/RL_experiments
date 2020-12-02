@@ -1,0 +1,27 @@
+---
+adress:
+  ["sumo-gui", "-c", "C:/Users/wangyannan/Desktop/practice/sumopy/4RL-test/simple6nodes.sumocfg", '--start']
+all_edge_list:
+  [ [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+    [ 'eDJ2J2', 'eJ3J2', 'eJ5J2', 'eJ1J2' ],
+    [ 'eDJ3J3', 'eDJ8J3', 'eJ6J3', 'eJ2J3' ],
+    [ 'eJ1J4', 'eJ5J4', 'eDJ4J4', 'eDJ9J4' ],
+    [ 'eJ2J5', 'eJ6J5', 'eDJ5J5', 'eJ4J5' ],
+    [ 'eJ3J6', 'eJ6DJ10', 'eDJ6J6', 'eJ5J6' ] ]
+id_list:
+  ['J1', 'J2', 'J3', 'J4', 'J5', 'J6']
+all_neighbor_list:
+  [ [ 'J2', 'J4' ],
+    [ 'J1', 'J3', 'J5' ],
+    [ 'J2', 'J6' ],
+    [ 'J1', 'J5' ],
+    [ 'J2', 'J4', 'J6' ],
+    [ 'J3', 'J5' ] ]
+all_neighber_number_list:
+  [ [ 1, 3 ],
+    [ 0, 2, 4 ],
+    [ 1, 5 ],
+    [ 0, 4 ],
+    [ 1, 3, 5 ],
+    [ 2, 4 ] ]
+
