@@ -23,7 +23,7 @@ class ReinforcementLearning:
     # create q-table
     def __init_q_table_from_states_and_actions(self, state_name_list, action_name_list):
         """仅完成初始化，通过添加index使空间动态增长"""
-        arrays1 = [[] * 1] * self.state_num # looks like ep. arrays1 = [[0], [0], [0], [0]]
-        idx1 = pd.MultiIndex.from_arrays(arrays1, names=state_name_list)
-        q_table = pd.DataFrame(np.nan, index=idx1, columns=action_name_list)
+        arrays = [[] * 1] * self.state_num # looks like ep. arrays1 = [[0], [0], [0], [0]]
+        idx = pd.MultiIndex.from_arrays(arrays, names=state_name_list)
+        q_table = pd.DataFrame(np.nan, index=idx, columns=action_name_list)
         return q_table
