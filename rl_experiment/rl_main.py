@@ -1,20 +1,42 @@
-import intersection_agent
-import rl_learning
-import traffic_environment
+########################################################################################################################
+#
+#
+#
+#
+#
+#
+########################################################################################################################
+from static_utilities import *
+from traffic_environment import TrafficEnvironment
 
-'''
-初始化
-1、读取配置文件
-2、实例化环境和Agents
-'''
+########################################################################################################################
+# Initialization
+# 1. read config info from file
+# 2. initialize the traffic simulation environment and all agents with info about reinforcement learning
+# 3. initialize the network game model (to be)
+########################################################################################################################
+# 1.
+env_setting, net_game_setting, rl_setting, agent_settings = get_settings_from_yaml(
+    yaml_file='rl_experiment_config.yaml')  # to read settings info
+# 2.
+traffic_environment = TrafficEnvironment(env_setting=env_setting)  # traffic environment
+intersection_agents = initialize_agents_by(agent_settings=agent_settings,
+                                           rl_setting=rl_setting)  # all agents:in a dict: [key is an agent's name] : [val is the Agent object from IntersectionAgent Class]
+# 3.
+########################################################################################################################
+# begin
+########################################################################################################################
+step = 0
+while step <= 3600:
+    # observe current states of all agents
 
-traffic_environment = TrafficEnvironment()
-for key,val in agent_settings.items():
-    intersection_agents[key] = IntersectionAgent(val)
+    #
+    step += 1
+    traffic_environment.simulation_step()
 
 '''
 开始仿真
-'''
+
 while step <= 3600
     #获取当前状态
     for key, agent in intersection_agents.items():
@@ -27,3 +49,4 @@ while step <= 3600
     #获取奖励
 
     #更新Q表
+'''
