@@ -9,14 +9,14 @@ net_game_settings:
     A_mat: [[1,0],[1.5,0]]
 rl_settings:
   learning_model:
-    name: 'QL'
+    model: 'QL'
     paras: {
       'alpha': 0.01,
       'gamma': 0.9,
       'epsilon': 0.9
     }
   action_selection:
-    name: 'eps-greedy'
+    model: 'eps-greedy'
     paras: {
       'epsilon': 0.9
     }

@@ -22,3 +22,12 @@ class IntersectionAgent:
         self.reinforcement_learning = ReinforcementLearning(rl_setting=rl_setting,
                                                             state_names=self.state_config['names'],
                                                             action_names=self.action_config['names'])
+    # 返回“状态”相关信息
+    def get_state_config(self):
+        return self.state_config
+    # 返回“状态”相关信息
+    def get_action_config(self):
+        return self.action_config
+    # action selection
+    def select_action(self,state):
+        return self.reinforcement_learning.select_action(state)

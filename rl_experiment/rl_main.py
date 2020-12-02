@@ -23,16 +23,30 @@ traffic_environment = TrafficEnvironment(env_setting=env_setting)  # traffic env
 intersection_agents = initialize_agents_by(agent_settings=agent_settings,
                                            rl_setting=rl_setting)  # all agents:in a dict: [key is an agent's name] : [val is the Agent object from IntersectionAgent Class]
 # 3.
+
+
 ########################################################################################################################
 # begin
 ########################################################################################################################
 step = 0
 while step <= 3600:
     # observe current states of all agents
-
-    #
+    all_agents_current_states = get_all_agents_states_by(environment=traffic_environment,
+                                                         agents_list=intersection_agents)
+    # action selection for every agent
+    all_agents_current_actions = get_al_agents_actions_by(agents_states=all_agents_current_states,
+                                                          agents_list=intersection_agents)
+    # take action in
+    execute_actions_in_environment(environment=traffic_environment,
+                                   actions_list=all_agents_current_actions,
+                                   agents_list=intersection_agents)
+    # simulation step
     step += 1
     traffic_environment.simulation_step()
+
+    # get rewards
+
+    # update q_table
 
 '''
 开始仿真
