@@ -8,7 +8,7 @@ while step <= 3600
     #获取奖励
     #更新Q表
 """
-
+import time
 from static_utilities import *
 from traffic_environment import TrafficEnvironment
 
@@ -35,6 +35,7 @@ traffic_environment.pre_run_simulation_to_prepare(100)  # pre run simulation wit
 all_agents_states_t = get_all_agents_states_by(environment=traffic_environment,
                                                agents_list=intersection_agents)
 while step <= 3600:
+    time_start = time.time()#计时
     # observe current states of all agents
     all_agents_current_states = all_agents_states_t
     # action selection for every agent
@@ -65,3 +66,17 @@ while step <= 3600:
                     rewards=all_agents_current_rewards,
                     q_values=all_agents_q_with_current_state,
                     agents_list=intersection_agents)
+    #
+    time_end = time.time()#计时结束
+    print('time cost: ', time_end - time_start, 's')
+
+    # 选择数据（用于存储）
+
+    # 清空变量
+    # clear_all_variables(all_agents_new_states,
+    #                     all_agents_current_states,
+    #                     all_agents_current_actions,
+    #                     all_agents_current_rewards,
+    #                     all_agents_q_with_current_state.clear())
+
+#存储数据到文件

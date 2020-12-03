@@ -83,7 +83,7 @@ def get_all_agents_rewards_by(environment, agents_list):
 def update_q_tables(pre_states, actions, post_states, rewards, q_values, agents_list):
     """更新Q表"""
     for name_id, agent in agents_list.items():
-        neighbors_q_values = get_agent_neighbors_q_values(agent=agent, q_values=q_values)
+        neighbors_q_values = get_agent_neighbors_q_values(neighbors_names=agent.neighbors, q_values=q_values)
         agent.update_q_table(pre_state=pre_states[name_id],
                              action=actions[name_id],
                              post_state=post_states[name_id],
@@ -91,10 +91,10 @@ def update_q_tables(pre_states, actions, post_states, rewards, q_values, agents_
                              neighbors_q=neighbors_q_values)
 
 
-def get_agent_neighbors_q_values(agent, q_values):
+def get_agent_neighbors_q_values(neighbors_names, q_values):
     """获得agent的所有邻居的Q值"""
     neighbors_q_values = []
-    for neighbor in agent.neighbors:
+    for neighbor in neighbors_names:
         neighbors_q_values.append(q_values[neighbor])
     return neighbors_q_values
 
@@ -105,3 +105,9 @@ def get_all_agents_q_by(pre_states, actions, agents_list):
     for name, agent in agents_list.items():
         all_agents_q[name] = agent.get_q_value_by(state=pre_states[name], action=actions[name])
     return all_agents_q
+
+
+def clear_all_variables(*args):
+    """清空所有变量"""
+    for arg in args:
+        arg.clear()
