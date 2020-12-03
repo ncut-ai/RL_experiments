@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from epsilon_greedy import *
 
 
 class ReinforcementLearning:
@@ -34,23 +35,11 @@ class ReinforcementLearning:
         self.__check_state_exist(state)
         if self.action_selection_model['model'] == 'eps-greedy':
             eps = self.action_selection_model['paras']['epsilon']
-            return self.__select_action_with_eps_greedy(epsilon=eps, state=state)
+            return epsilon_greedy(epsilon=eps, state=state, q_table=self.q_table, all_actions=self.action_names)
         elif self.action_selection_model['model'] == 'UCB': # to be
             pass
         else:
             raise Exception('there is no such a selection model')
-
-    def __select_action_with_eps_greedy(self, epsilon, state):
-        """epsilon greedy"""
-        if np.random.uniform() < epsilon:  # 选择Q_value 最高的action
-            # choose best action
-            state_action = self.q_table.loc[state, :]  # loc是获取一列的值:取q_table的observation行，所有列
-            # some actions may have the same value, randomly choose on in these actions
-            action = np.random.choice(state_action[state_action == np.max(state_action)].index)  # np.max（）：取行方向的最大值
-        else:
-            # choose random action
-            action = np.random.choice(self.action_names)
-        return action
 
     def get_q_value_by(self, state, action):
         """根据state和action读取Q值"""

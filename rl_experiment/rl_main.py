@@ -38,8 +38,8 @@ while step <= 3600:
     # observe current states of all agents
     all_agents_current_states = all_agents_states_t
     # action selection for every agent
-    all_agents_current_actions = get_al_agents_actions_by(agents_states=all_agents_current_states,
-                                                          agents_list=intersection_agents)
+    all_agents_current_actions = get_all_agents_actions_by(agents_states=all_agents_current_states,
+                                                           agents_list=intersection_agents)
     # take action in
     execute_actions_in_environment(environment=traffic_environment,
                                    actions_list=all_agents_current_actions,
@@ -54,9 +54,14 @@ while step <= 3600:
     all_agents_new_states = get_all_agents_states_by(environment=traffic_environment,
                                                      agents_list=intersection_agents)
     all_agents_states_t = all_agents_new_states
+    # retrieve all agents' q
+    all_agents_q_with_current_state = get_all_agents_q_by(pre_states=all_agents_current_states,
+                                                          actions=all_agents_current_actions,
+                                                          agents_list=intersection_agents)
     # update q_table
     update_q_tables(pre_states=all_agents_current_states,
                     actions=all_agents_current_actions,
                     post_states=all_agents_new_states,
                     rewards=all_agents_current_rewards,
+                    q_values=all_agents_q_with_current_state,
                     agents_list=intersection_agents)
