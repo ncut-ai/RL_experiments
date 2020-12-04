@@ -20,7 +20,7 @@ SPDX-License-Identifier: EPL-2.0
     <output>
         <write-license value="true"/>
         <queue-output value="output_queue.xml"/>
-        <full-output value="output_full-output"/>
+        <!--full-output value="output_full-output"/-->
     </output>
     <time>
     	<begin value="0"/>
