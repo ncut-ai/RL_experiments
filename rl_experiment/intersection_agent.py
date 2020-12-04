@@ -1,5 +1,6 @@
 from reinforcement_learning import ReinforcementLearning
 
+
 class IntersectionAgent:
     """
 
@@ -31,17 +32,21 @@ class IntersectionAgent:
         """返回“奖励”相关信息"""
         return self.reward_config
 
-    def get_q_value_by(self,state,action):
-        return self.reinforcement_learning.get_q_value_by(state,action)
+    def get_q_value_by(self, state, action):
+        return self.reinforcement_learning.get_q_value_by(state, action)
+
+    def get_learning_model_type(self):
+        """get learning model type, QL_single, QL_neighbors, QL_neighbors_NetGame, SARSA, etc"""
+        return self.reinforcement_learning.get_learning_model_type()
 
     def select_action(self, state):
         """action selection"""
         return self.reinforcement_learning.select_action(state)
 
-    def update_q_table(self, pre_state,action,post_state,reward,neighbors_q):
+    def update_q_table_ql(self, pre_state, action, post_state, reward, neighbors_q):
         """ update q table """
-        self.reinforcement_learning.update_q_table(pre_state=pre_state,
-                                                   action=action,
-                                                   post_state=post_state,
-                                                   reward=reward,
-                                                   neighbors_q=neighbors_q)
+        self.reinforcement_learning.update_q_table_ql(pre_state=pre_state,
+                                                      action=action,
+                                                      post_state=post_state,
+                                                      reward=reward,
+                                                      neighbors_q=neighbors_q)

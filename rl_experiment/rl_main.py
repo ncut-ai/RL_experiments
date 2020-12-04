@@ -59,18 +59,22 @@ while step <= 3600:
     all_agents_q_with_current_state = get_all_agents_q_by(pre_states=all_agents_current_states,
                                                           actions=all_agents_current_actions,
                                                           agents_list=intersection_agents)
+    # retrieve all agents' learning model type
+    all_agents_learning_type = get_all_agents_learning_type(agents_list=intersection_agents)
     # update q_table
     update_q_tables(pre_states=all_agents_current_states,
                     actions=all_agents_current_actions,
                     post_states=all_agents_new_states,
                     rewards=all_agents_current_rewards,
                     q_values=all_agents_q_with_current_state,
+                    learning_types=all_agents_learning_type,
                     agents_list=intersection_agents)
     #
     time_end = time.time()#计时结束
     print('time cost: ', time_end - time_start, 's')
 
     # 选择数据（用于存储）
+
 
     # 清空变量
     # clear_all_variables(all_agents_new_states,

@@ -7,6 +7,7 @@
 """
 
 import yaml
+
 from intersection_agent import IntersectionAgent
 
 
@@ -80,15 +81,41 @@ def get_all_agents_rewards_by(environment, agents_list):
     return all_agents_rewards
 
 
-def update_q_tables(pre_states, actions, post_states, rewards, q_values, agents_list):
+def get_all_agents_learning_type(agents_list):
+    """get all agents' learning model type"""
+    all_agents_learning_type = {}
+    for name, agent in agents_list.items():
+        all_agents_learning_type[name] = agent.get_learning_model_type()
+    return all_agents_learning_type
+
+
+def update_q_tables(**kwargs):
     """更新Q表"""
+    # 获取参数
+    pre_states = kwargs['pre_states']
+    actions = kwargs['actions']
+    post_states = kwargs['post_states']
+    rewards = kwargs['rewards']
+    q_values = kwargs['q_values']
+    learning_types = kwargs['learning_types']
+    agents_list = kwargs['agents_list']
+
+    #
     for name_id, agent in agents_list.items():
-        neighbors_q_values = get_agent_neighbors_q_values(neighbors_names=agent.neighbors, q_values=q_values)
-        agent.update_q_table(pre_state=pre_states[name_id],
-                             action=actions[name_id],
-                             post_state=post_states[name_id],
-                             reward=rewards[name_id],
-                             neighbors_q=neighbors_q_values)
+        learning_model_type = learning_types[name_id]
+        if learning_model_type == 'QL':
+            neighbors_q_values = get_agent_neighbors_q_values(neighbors_names=agent.neighbors, q_values=q_values)
+            agent.update_q_table_ql(pre_state=pre_states[name_id],
+                                    action=actions[name_id],
+                                    post_state=post_states[name_id],
+                                    reward=rewards[name_id],
+                                    neighbors_q=neighbors_q_values)
+        elif learning_model_type == 'QL_NetGame':
+            pass
+        elif learning_model_type == 'SARSA':
+            pass
+        else:
+            raise ValueError('No such a Learning Model')
 
 
 def get_agent_neighbors_q_values(neighbors_names, q_values):

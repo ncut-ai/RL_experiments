@@ -1,6 +1,7 @@
-import numpy as np
 import pandas as pd
-from epsilon_greedy import *
+
+from epsilon_greedy import epsilon_greedy
+from q_learning_with_neighbors import q_learning_with_neighbors
 
 
 class ReinforcementLearning:
@@ -36,7 +37,7 @@ class ReinforcementLearning:
         if self.action_selection_model['model'] == 'eps-greedy':
             eps = self.action_selection_model['paras']['epsilon']
             return epsilon_greedy(epsilon=eps, state=state, q_table=self.q_table, all_actions=self.action_names)
-        elif self.action_selection_model['model'] == 'UCB': # to be
+        elif self.action_selection_model['model'] == 'UCB':  # to be
             pass
         else:
             raise Exception('there is no such a selection model')
@@ -46,33 +47,34 @@ class ReinforcementLearning:
         self.__check_state_exist(state)
         return self.q_table.loc[state, action]
 
-    def update_q_table(self, pre_state, action, post_state, reward, neighbors_q):
+    def get_learning_model_type(self):
+        """get learning model type, QL_single, QL_neighbors, QL_neighbors_NetGame, SARSA, etc"""
+        return self.learning_model['model']
+
+    def update_q_table_ql(self, pre_state, action, post_state, reward, neighbors_q):
         """ update q table """
         self.__check_state_exist(pre_state)
         self.__check_state_exist(post_state)
         if self.__check_reward_num(reward) == 'single_reward':
-            self.__update_q_table_with_single_reward(pre_state=pre_state,
-                                                     action=action,
-                                                     post_state=post_state,
-                                                     reward=list(reward.values())[0],
-                                                     neighbors_q=neighbors_q)
+            alpha = self.learning_model['paras']['alpha']
+            gamma = self.learning_model['paras']['gamma']
+            reward = list(reward.values())[0]
+            pre_q = self.q_table.loc[pre_state, action]
+            q_max_for_post_state = self.q_table.loc[post_state, :].max()
+
+            q_new = q_learning_with_neighbors(alpha=alpha,
+                                              gamma=gamma,
+                                              reward=reward,
+                                              pre_q=pre_q,
+                                              q_max_for_post_state=q_max_for_post_state,
+                                              neighbors_q=neighbors_q)
+            self.__update_q_table_by(state=pre_state, action=action, q=q_new)
         else:
             raise ValueError('reward value or type ERROR')
 
-    def __update_q_table_with_single_reward(self, pre_state, action, post_state, reward, neighbors_q):
-        """ update q table with a single reward value"""
-        if self.learning_model['model'] == 'QL':
-            alpha = self.learning_model['paras']['alpha']
-            gamma = self.learning_model['paras']['gamma']
-            pre_q = self.q_table.loc[pre_state, action]
-            q_max_for_post_state = self.q_table.loc[post_state, :].max()
-            neighbors_q_sum = sum(neighbors_q)
-
-            q_new = pre_q * (1 - alpha) + alpha * (reward + gamma * (q_max_for_post_state + neighbors_q_sum))
-
-            self.q_table.loc[pre_state, action] = q_new
-        else:
-            raise ValueError('No such a learning model')
+    def __update_q_table_by(self, state, action, q):
+        """ update q table with state,action,q"""
+        self.q_table.loc[state, action] = q
 
     def __check_reward_num(self, reward):
         """判断reward的个数"""
