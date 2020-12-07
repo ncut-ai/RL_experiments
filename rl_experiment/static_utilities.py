@@ -23,17 +23,16 @@ def get_settings_from_yaml(yaml_file):
     yaml_data = read_yaml(yaml_file)[0]
     env_settings = yaml_data['environment_settings']  # 仿真环境配置参数
     net_game_settings = yaml_data['net_game_settings']  # 网络博弈模型参数
-    rl_settings = yaml_data['rl_settings']  # 强化学习模型参数
     agent_settings = yaml_data['agent_settings']  # 路口Agents初始化参数
 
-    return env_settings, net_game_settings, rl_settings, agent_settings
+    return env_settings, net_game_settings, agent_settings
 
 
-def initialize_agents_by(agent_settings, rl_setting):
+def initialize_agents_by(agent_settings):
     """Initialize all intersection agents according to agent settings"""
     intersection_agents = {}
     for key, val in agent_settings.items():
-        intersection_agents[key] = IntersectionAgent(agent_setting=val, rl_setting=rl_setting)
+        intersection_agents[key] = IntersectionAgent(agent_setting=val)
     return intersection_agents
 
 
@@ -49,15 +48,6 @@ def get_all_agents_states_by(environment, agents_list):
             state_val = state_val + (state_val_t,)
         all_agents_current_states[name] = state_val
     return all_agents_current_states
-
-
-def get_all_agents_actions_by(agents_states, agents_list):
-    """获取指定状态下agents选择的动作"""
-    all_agent_selected_actions = {}
-    for name, agent in agents_list.items():
-        action = agent.select_action(agents_states[name])
-        all_agent_selected_actions[name] = action
-    return all_agent_selected_actions
 
 
 def execute_actions_in_environment(environment, actions_list, agents_list):
@@ -89,35 +79,6 @@ def get_all_agents_learning_type(agents_list):
     return all_agents_learning_type
 
 
-def update_q_tables(**kwargs):
-    """更新Q表"""
-    # 获取参数
-    pre_states = kwargs['pre_states']
-    actions = kwargs['actions']
-    post_states = kwargs['post_states']
-    rewards = kwargs['rewards']
-    q_values = kwargs['q_values']
-    learning_types = kwargs['learning_types']
-    agents_list = kwargs['agents_list']
-
-    #
-    for name_id, agent in agents_list.items():
-        learning_model_type = learning_types[name_id]
-        if learning_model_type == 'QL':
-            neighbors_q_values = get_agent_neighbors_q_values(neighbors_names=agent.neighbors, q_values=q_values)
-            agent.update_q_table_ql(pre_state=pre_states[name_id],
-                                    action=actions[name_id],
-                                    post_state=post_states[name_id],
-                                    reward=rewards[name_id],
-                                    neighbors_q=neighbors_q_values)
-        elif learning_model_type == 'QL_NetGame':
-            pass
-        elif learning_model_type == 'SARSA':
-            pass
-        else:
-            raise ValueError('No such a Learning Model')
-
-
 def get_agent_neighbors_q_values(neighbors_names, q_values):
     """获得agent的所有邻居的Q值"""
     neighbors_q_values = []
@@ -138,3 +99,57 @@ def clear_all_variables(*args):
     """清空所有变量"""
     for arg in args:
         arg.clear()
+
+
+def get_all_agents_actions_by(agents_states, agents_list):
+    """获取指定状态下agents选择的动作"""
+    all_agent_selected_actions = {}
+    for name, agent in agents_list.items():
+        action_selection_model = agent.get_action_selection_model() #获得该Agent的动作类型
+        if action_selection_model == 'eps-greedy':
+            action = agent.select_action_eps_greedy(agents_states[name]) #参数：状态
+        elif action_selection_model == 'UCB':  # to be
+            action = agent.select_action_ucb(agents_states[name])
+        else:
+            raise Exception('there is no such a selection model')
+        all_agent_selected_actions[name] = action
+    return all_agent_selected_actions
+
+
+def update_q_tables(**kwargs):
+    """更新Q表"""
+    # 获取参数
+    learning_types = kwargs['learning_types']
+    agents_list = kwargs['agents_list']
+    # 获取others参数
+    pre_states = kwargs['pre_states']
+    actions = kwargs['actions']
+    post_states = kwargs['post_states']
+    rewards = kwargs['rewards']
+    q_values = kwargs['q_values']
+
+    #
+    for name_id, agent in agents_list.items():
+        learning_model_type = learning_types[name_id]  # 获取当前Agent的学习类型，针对不同的学习类型，获得不同的参数
+
+        if learning_model_type == 'QL':  # q_learning local only
+            #
+            agent.update_q_table_ql_single(pre_state=pre_states[name_id],
+                                           action=actions[name_id],
+                                           post_state=post_states[name_id],
+                                           reward=rewards[name_id])
+        elif learning_model_type == 'QL_with_neighbors':
+            # 获得邻居q值
+            neighbors_q_values = get_agent_neighbors_q_values(neighbors_names=agent.neighbors, q_values=q_values)
+            # 更新Q值
+            agent.update_q_table_ql_with_neighbors(pre_state=pre_states[name_id],
+                                                   action=actions[name_id],
+                                                   post_state=post_states[name_id],
+                                                   reward=rewards[name_id],
+                                                   neighbors_q=neighbors_q_values)
+        elif learning_model_type == 'QL_NetGame':
+            pass
+        elif learning_model_type == 'SARSA':
+            pass
+        else:
+            raise ValueError('No such a Learning Model')

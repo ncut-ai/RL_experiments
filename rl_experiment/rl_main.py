@@ -9,6 +9,7 @@ while step <= 3600
     #更新Q表
 """
 import time
+
 from static_utilities import *
 from traffic_environment import TrafficEnvironment
 
@@ -19,23 +20,23 @@ from traffic_environment import TrafficEnvironment
 # 3. initialize the network game model (to be)
 '''
 # 1.
-env_setting, net_game_setting, rl_setting, agent_settings = get_settings_from_yaml(
-    yaml_file='rl_experiment_config.yaml')  # to read settings info
+env_setting, net_game_setting, agent_settings = get_settings_from_yaml(
+    yaml_file='_config.yaml')  # to read settings info
 # 2.
 traffic_environment = TrafficEnvironment(env_setting=env_setting)  # traffic environment
-intersection_agents = initialize_agents_by(agent_settings=agent_settings,
-                                           rl_setting=rl_setting)  # all agents:in a dict: [key is an agent's name] : [val is the Agent object from IntersectionAgent Class]
+intersection_agents = initialize_agents_by(
+    agent_settings=agent_settings)  # all agents:in a dict: [key is an agent's name] : [val is the Agent object from IntersectionAgent Class]
 # 3.
 
 
 '''begin'''
 step = 0  #
-traffic_environment.pre_run_simulation_to_prepare(100)  # pre run simulation with doing nothing
+traffic_environment.pre_run_simulation_to_prepare(env_setting['pre_steps'])  # pre run simulation with doing nothing
 # get current states
 all_agents_states_t = get_all_agents_states_by(environment=traffic_environment,
                                                agents_list=intersection_agents)
-while step <= 3600:
-    time_start = time.time()#计时
+while step <= env_setting['simulation_time']:
+    time_start = time.time()  # 计时
     # observe current states of all agents
     all_agents_current_states = all_agents_states_t
     # action selection for every agent
@@ -70,11 +71,10 @@ while step <= 3600:
                     learning_types=all_agents_learning_type,
                     agents_list=intersection_agents)
     #
-    time_end = time.time()#计时结束
+    time_end = time.time()  # 计时结束
     print('time cost: ', time_end - time_start, 's')
 
     # 选择数据（用于存储）
-
 
     # 清空变量
     # clear_all_variables(all_agents_new_states,
@@ -83,4 +83,4 @@ while step <= 3600:
     #                     all_agents_current_rewards,
     #                     all_agents_q_with_current_state.clear())
 
-#存储数据到文件
+# 存储数据到文件

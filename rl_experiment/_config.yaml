@@ -1,0 +1,301 @@
+environment_settings:
+  sumo_start_config: ["sumo-gui", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
+  sumo_start_config_cmd: ["sumo", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
+  runtime_type: gui
+  pre_steps: 100
+  simulation_time: 3600
+net_game_settings:
+  model: 'PDG'
+  agents:
+    id_list: [0,1,2,3,4,5]
+    edge_list: [(0,1),(0,3),(1,2),(1,4),(2,5),(3,4),(4,5)]
+    A_mat: [[1,0],[1.5,0]]
+agent_settings:
+  J1:
+    cross_id: J1
+    states:
+      names: ['东直排队','西直排队','南直排队','北直排队']
+      types: {
+        '东直排队': 'queue_count',
+        '西直排队': 'queue_count',
+        '南直排队': 'queue_count',
+        '北直排队': 'queue_count'
+      }
+      retrieve_para: {
+        '东直排队': 'eJ2J1',
+        '西直排队': 'eDJ7J1',
+        '南直排队': 'eJ4J1',
+        '北直排队': 'eDJ1J1'
+      }
+    actions:
+      names: ['保持相位', '切换到下一相位']
+      types: {
+        '保持相位': 'keep',
+        '切换到下一相位': 'switch',
+      }
+      para: {
+        '保持相位': '-1',
+        '切换到下一相位': '0',
+      }
+    rewards:
+      names: ['路口总等待时间']
+      types: {
+        '路口总等待时间': 'sum_waiting_time',
+      }
+      retrieve_para: {
+        '路口总等待时间': [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+      }
+    neighbors: [ 'J2', 'J4' ]
+    rl_settings:
+      learning_model:
+        model: 'QL_with_neighbors'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  J2:
+    cross_id: J2
+    states:
+      names: ['东直排队','西直排队','南直排队','北直排队']
+      types: {
+        '东直排队': 'queue_count',
+        '西直排队': 'queue_count',
+        '南直排队': 'queue_count',
+        '北直排队': 'queue_count'
+      }
+      retrieve_para: {
+        '东直排队': 'eJ3J2',
+        '西直排队': 'eJ1J2',
+        '南直排队': 'eJ5J2',
+        '北直排队': 'eDJ2J2'
+      }
+    actions:
+      names: ['保持相位', '切换到下一相位']
+      types: {
+        '保持相位': 'keep',
+        '切换到下一相位': 'switch',
+      }
+      para: {
+        '保持相位': '-1',
+        '切换到下一相位': '0',
+      }
+    rewards:
+      names: ['路口总等待时间']
+      types: {
+        '路口总等待时间': 'sum_waiting_time',
+      }
+      retrieve_para: {
+        '路口总等待时间': [ 'eDJ2J2', 'eJ3J2', 'eJ5J2', 'eJ1J2' ],
+      }
+    neighbors: [ 'J1', 'J3', 'J5' ]
+    rl_settings:
+      learning_model:
+        model: 'QL_with_neighbors'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  J3:
+    cross_id: J3
+    states:
+      names: ['东直排队','西直排队','南直排队','北直排队']
+      types: {
+        '东直排队': 'queue_count',
+        '西直排队': 'queue_count',
+        '南直排队': 'queue_count',
+        '北直排队': 'queue_count'
+      }
+      retrieve_para: {
+        '东直排队': 'eDJ8J3',
+        '西直排队': 'eJ2J3',
+        '南直排队': 'eJ6J3',
+        '北直排队': 'eDJ3J3'
+      }
+    actions:
+      names: ['保持相位', '切换到下一相位']
+      types: {
+        '保持相位': 'keep',
+        '切换到下一相位': 'switch',
+      }
+      para: {
+        '保持相位': '-1',
+        '切换到下一相位': '0',
+      }
+    rewards:
+      names: ['路口总等待时间']
+      types: {
+        '路口总等待时间': 'sum_waiting_time',
+      }
+      retrieve_para: {
+        '路口总等待时间': [ 'eDJ3J3', 'eDJ8J3', 'eJ6J3', 'eJ2J3' ],
+      }
+    neighbors: [ 'J2', 'J6' ]
+    rl_settings:
+      learning_model:
+        model: 'QL'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  J4:
+    cross_id: J4
+    states:
+      names: ['东直排队','西直排队','南直排队','北直排队']
+      types: {
+        '东直排队': 'queue_count',
+        '西直排队': 'queue_count',
+        '南直排队': 'queue_count',
+        '北直排队': 'queue_count'
+      }
+      retrieve_para: {
+        '东直排队': 'eJ5J4',
+        '西直排队': 'eDJ9J4',
+        '南直排队': 'eDJ4J4',
+        '北直排队': 'eJ1J4'
+      }
+    actions:
+      names: ['保持相位', '切换到下一相位']
+      types: {
+        '保持相位': 'keep',
+        '切换到下一相位': 'switch',
+      }
+      para: {
+        '保持相位': '-1',
+        '切换到下一相位': '0',
+      }
+    rewards:
+      names: ['路口总等待时间']
+      types: {
+        '路口总等待时间': 'sum_waiting_time',
+      }
+      retrieve_para: {
+        '路口总等待时间': [ 'eJ1J4', 'eJ5J4', 'eDJ4J4', 'eDJ9J4' ],
+      }
+    neighbors: [ 'J1', 'J5' ]
+    rl_settings:
+      learning_model:
+        model: 'QL'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  J5:
+    cross_id: J5
+    states:
+      names: ['东直排队','西直排队','南直排队','北直排队']
+      types: {
+        '东直排队': 'queue_count',
+        '西直排队': 'queue_count',
+        '南直排队': 'queue_count',
+        '北直排队': 'queue_count'
+      }
+      retrieve_para: {
+        '东直排队': 'eJ6J5',
+        '西直排队': 'eJ4J5',
+        '南直排队': 'eDJ5J5',
+        '北直排队': 'eJ2J5'
+      }
+    actions:
+      names: ['保持相位', '切换到下一相位']
+      types: {
+        '保持相位': 'keep',
+        '切换到下一相位': 'switch',
+      }
+      para: {
+        '保持相位': '-1',
+        '切换到下一相位': '0',
+      }
+    rewards:
+      names: ['路口总等待时间']
+      types: {
+        '路口总等待时间': 'sum_waiting_time',
+      }
+      retrieve_para: {
+        '路口总等待时间': [ 'eJ2J5', 'eJ6J5', 'eDJ5J5', 'eJ4J5' ],
+      }
+    neighbors: [ 'J2', 'J4', 'J6' ]
+    rl_settings:
+      learning_model:
+        model: 'QL'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  J6:
+    cross_id: J6
+    states:
+      names: ['东直排队','西直排队','南直排队','北直排队']
+      types: {
+        '东直排队': 'queue_count',
+        '西直排队': 'queue_count',
+        '南直排队': 'queue_count',
+        '北直排队': 'queue_count'
+      }
+      retrieve_para: {
+        '东直排队': 'eDJ10J6',
+        '西直排队': 'eJ5J6',
+        '南直排队': 'eDJ6J6',
+        '北直排队': 'eJ3J6'
+      }
+    actions:
+      names: ['保持相位', '切换到下一相位']
+      types: {
+        '保持相位': 'keep',
+        '切换到下一相位': 'switch',
+      }
+      para: {
+        '保持相位': '-1',
+        '切换到下一相位': '0',
+      }
+    rewards:
+      names: ['路口总等待时间']
+      types: {
+        '路口总等待时间': 'sum_waiting_time',
+      }
+      retrieve_para: {
+        '路口总等待时间': [ 'eJ3J6', 'eDJ10J6', 'eDJ6J6', 'eJ5J6' ],
+      }
+    neighbors: [ 'J3', 'J5' ]
+    rl_settings:
+      learning_model:
+        model: 'QL'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }

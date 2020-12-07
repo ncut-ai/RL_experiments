@@ -6,7 +6,7 @@ class IntersectionAgent:
 
     """
 
-    def __init__(self, agent_setting, rl_setting):
+    def __init__(self, agent_setting):
         """Initialization"""
         print('Agent初始化……')
         self.agent_id = agent_setting['cross_id']  # agent_id denoted as cross id
@@ -16,6 +16,7 @@ class IntersectionAgent:
         self.reward_config = agent_setting['rewards']  # reward config
         self.neighbors = agent_setting['neighbors']  # neighbor agents' names
         #
+        rl_setting = agent_setting['rl_settings']  # 强化学习模型
         self.reinforcement_learning = ReinforcementLearning(rl_setting=rl_setting,
                                                             state_names=self.state_config['names'],
                                                             action_names=self.action_config['names'])
@@ -39,14 +40,29 @@ class IntersectionAgent:
         """get learning model type, QL_single, QL_neighbors, QL_neighbors_NetGame, SARSA, etc"""
         return self.reinforcement_learning.get_learning_model_type()
 
-    def select_action(self, state):
-        """action selection"""
-        return self.reinforcement_learning.select_action(state)
+    def get_action_selection_model(self):
+        """获取动作选择模型"""
+        return self.reinforcement_learning.get_action_selection_model()
 
-    def update_q_table_ql(self, pre_state, action, post_state, reward, neighbors_q):
-        """ update q table """
-        self.reinforcement_learning.update_q_table_ql(pre_state=pre_state,
-                                                      action=action,
-                                                      post_state=post_state,
-                                                      reward=reward,
-                                                      neighbors_q=neighbors_q)
+    def select_action_eps_greedy(self, state):
+        """action selection"""
+        return self.reinforcement_learning.select_action_eps_greedy(state=state)
+
+    def select_action_ucb(self, state):
+        """UCB算法，动作选择"""
+        return self.reinforcement_learning.select_action_ucb(state=state)
+
+    def update_q_table_ql_single(self, pre_state, action, post_state, reward):
+        """更新Q表，只考虑本地信息"""
+        self.reinforcement_learning.update_q_table_ql_single(pre_state=pre_state,
+                                                             action=action,
+                                                             post_state=post_state,
+                                                             reward=reward)
+
+    def update_q_table_ql_with_neighbors(self, pre_state, action, post_state, reward, neighbors_q):
+        """ update q table 考虑邻居的影响"""
+        self.reinforcement_learning.update_q_table_ql_with_neighbors(pre_state=pre_state,
+                                                                     action=action,
+                                                                     post_state=post_state,
+                                                                     reward=reward,
+                                                                     neighbors_q=neighbors_q)
