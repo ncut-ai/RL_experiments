@@ -24,7 +24,7 @@ SPDX-License-Identifier: EPL-2.0
     </output>
     <time>
     	<begin value="0"/>
-    	<end value="1800"/>
+    	<end value="4800"/>
     </time>
 
 <!--
