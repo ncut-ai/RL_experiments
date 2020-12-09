@@ -20,7 +20,7 @@ from traffic_environment import TrafficEnvironment
 # 3. initialize the network game model (to be)
 '''
 # 1.
-env_setting, net_game_setting, agent_settings = get_settings_from_yaml(
+env_setting, net_game_setting, agent_settings, runtime_data = get_settings_from_yaml(
     yaml_file='_config.yaml')  # to read settings info
 # 2.
 traffic_environment = TrafficEnvironment(env_setting=env_setting)  # traffic environment
@@ -70,12 +70,14 @@ while step <= env_setting['simulation_time']:
                     q_values=all_agents_q_with_current_state,
                     learning_types=all_agents_learning_type,
                     agents_list=intersection_agents)
-    #
     time_end = time.time()  # 计时结束
     print('time cost: ', time_end - time_start, 's')
-
     # 选择数据（用于存储）
-
+    data_collection(step, runtime_data,
+                    states=all_agents_current_states,
+                    actions=all_agents_current_actions,
+                    rewards=all_agents_current_rewards,
+                    q_vals=all_agents_q_with_current_state)
     # 清空变量
     # clear_all_variables(all_agents_new_states,
     #                     all_agents_current_states,
@@ -84,3 +86,4 @@ while step <= env_setting['simulation_time']:
     #                     all_agents_q_with_current_state.clear())
 
 # 存储数据到文件
+save_data_h5py('to_h5py', data=runtime_data, file_path=env_setting['data_save_filepath'])

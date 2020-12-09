@@ -6,8 +6,9 @@
 
 """
 
+import h5py
 import yaml
-
+import pickle
 from intersection_agent import IntersectionAgent
 
 
@@ -25,7 +26,9 @@ def get_settings_from_yaml(yaml_file):
     net_game_settings = yaml_data['net_game_settings']  # 网络博弈模型参数
     agent_settings = yaml_data['agent_settings']  # 路口Agents初始化参数
 
-    return env_settings, net_game_settings, agent_settings
+    runtime_data = {}  # 用于存储运行过程中的数据
+
+    return env_settings, net_game_settings, agent_settings, runtime_data
 
 
 def initialize_agents_by(agent_settings):
@@ -101,19 +104,44 @@ def clear_all_variables(*args):
         arg.clear()
 
 
+def data_collection(*args, **kwargs):  # 未完成
+    """用于运行数据存储"""
+    args[1][args[0]] = {}  # 嵌套词典存储
+    args[1][args[0]]['states'] = kwargs['states']
+    args[1][args[0]]['actions'] = kwargs['actions']
+    args[1][args[0]]['rewards'] = kwargs['rewards']
+    args[1][args[0]]['q_vals'] = kwargs['q_vals']
+
+
+def save_data_h5py(*args, **kwargs):
+    """保存数据到文件"""
+    print(args[0])
+    file_name = kwargs['file_path'][0]
+    data = kwargs['data']
+    hf_object = open(file_name, 'wb')
+    pickle.dump(data, hf_object)
+    hf_object.close()
+
+
 def get_all_agents_actions_by(agents_states, agents_list):
     """获取指定状态下agents选择的动作"""
     all_agent_selected_actions = {}
     for name, agent in agents_list.items():
-        action_selection_model = agent.get_action_selection_model() #获得该Agent的动作类型
+        action_selection_model = agent.get_action_selection_model()  # 获得该Agent的动作类型
+        #
         if action_selection_model == 'eps-greedy':
-            action = agent.select_action_eps_greedy(agents_states[name]) #参数：状态
+            #
+            action = agent.select_action_eps_greedy(agents_states[name])  # 参数：状态
+        #
         elif action_selection_model == 'UCB':  # to be
+            #
             action = agent.select_action_ucb(agents_states[name])
         else:
             raise Exception('there is no such a selection model')
+        #
         all_agent_selected_actions[name] = action
-    return all_agent_selected_actions
+
+    return all_agent_selected_actions  # 返回
 
 
 def update_q_tables(**kwargs):
