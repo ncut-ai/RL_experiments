@@ -1,19 +1,29 @@
 # Reinforcement Learning Experiment
-## 1. 结构说明
-### 1.1 environment class
+## 0. 结构说明
+### 0.1 environment class
 1. 表示系统环境
 2. 完成数据检索
 3. 完成agent动作执行
-### 1.2 agent class
+### 0.2 agent class
 1. 表示路口
 2. 与环境交互
-### 1.3 reinforcement class
+### 0.3 reinforcement class
 1. 与强化学习有关
 2. 作为agent的组成部分
 3. 包括动作选择
 4. 包括Q值 update function
+## 1. 基本定义
+### 1.1 状态
+#### 1.1.1 定义：在yaml中
+#### 1.1.2 实现
+### 1.2 动作
+#### 1.2.1 定义：在yaml中
+#### 1.2.2 实现
+### 1.3 奖励
+见 2.4
 ## 2. 主要模型
-### 2.1 action selection models
+### 2.1 动作选择模型
+#### 2.1.1 yaml配置
 1. epsilon greedy  
 <pre><code>
 model: 'eps_greedy'    
@@ -22,13 +32,16 @@ paras: {
        }
 </code></pre>
 
-2. UCB (未实现)
+2. UCB 
 <pre><code>
-model: 'UCB
-paras: { # 待定
-       }
+model: 'UCB'
+paras: { }
 </code></pre>
-### 2.2 learning models
+### 2.2 Q-Learning算法实现
+#### 2.2.1 算法流程
+rl_main_ql.py
+
+#### 2.2.2 yaml文件配置
 a. Q-Learning 算法（单路口）
 <pre><code>
 model: 'QL'
@@ -47,10 +60,13 @@ paras: {
           'epsilon': 0.9
         }
 </code></pre>
-### 2.3 奖励计算方法
+### 2.3 SARSA算法
+#### 2.3.1 算法流程
+rl_main_sarsa.py
+### 2.4 奖励计算方法
 a. 简单计算方法  
 <pre><code>
-type: 'single'  
+compute_type: 'single'  
 names: ['路口总等待时间']
 types: {
         '路口总等待时间': 'sum_waiting_time',
@@ -62,7 +78,7 @@ retrieve_para: {
 b. 简单计算方法，进行等级划分
 按指标等级划分为：低、中、高
 <pre><code>
-type: 'single_qualitative'  
+compute_type: 'single_qualitative'  
 names: ['路口总等待时间']
 types: {
         '路口总等待时间': 'sum_waiting_time',
@@ -82,7 +98,7 @@ r^i_{t+1}=[\eta_1\times(r^{i,j,1}_{t+1}+r^{i,j,2}_{t+1})]+[\eta_2\times(r^{i,k,1
 $$
 
 <pre><code>
-type: 'weighted'  
+compute_type: 'weighted'  
 names: ['东直排队', '西直排队']
 types: {
         '东直排队': 'queue',  
@@ -118,7 +134,7 @@ weight_vals: {
        }
 </code></pre>
 
-### 2.4 网络博弈模型 （未添加）
+### 2.5 网络博弈模型 （未添加）
 
 ## 3. Sumo仿真模型
 1. 6个路口

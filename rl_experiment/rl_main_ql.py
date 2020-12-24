@@ -1,7 +1,5 @@
 """
-开始仿真
-
-while step <= 3600
+Q-Learning算法流程：
     #获取当前状态
     #agent返回动作
     #执行仿真
@@ -15,6 +13,7 @@ from static_utilities_states import *
 from static_utilities_actions import *
 from static_utilities_rewards import *
 from static_utilities_q import *
+from static_utilities_update_q_ql import *
 
 from traffic_environment import TrafficEnvironment
 
@@ -26,7 +25,7 @@ from traffic_environment import TrafficEnvironment
 '''
 # 1.
 env_setting, net_game_setting, agent_settings, runtime_data = get_settings_from_yaml(
-    yaml_file='_config_multi_rewards_test.yaml')  # to read settings info
+    yaml_file='_config_multi_rewards_test_and_UCB.yaml')  # to read settings info
 # 2.
 traffic_environment = TrafficEnvironment(env_setting=env_setting)  # traffic environment
 intersection_agents = initialize_agents_by(
@@ -91,4 +90,4 @@ while step <= env_setting['simulation_time']:
     #                     all_agents_q_with_current_state.clear())
 
 # 存储数据到文件
-save_data_h5py('to_h5py', data=runtime_data, file_path=env_setting['data_save_filepath'])
+save_data_h5py('to_pickle', data=runtime_data, file_path=env_setting['data_save_filepath'])

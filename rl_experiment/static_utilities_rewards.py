@@ -4,7 +4,7 @@ def get_all_agents_rewards_by(environment, agents_list):
     for agent_id, agent in agents_list.items():
         reward_config = agent.get_reward_config()
         reward_val = {}
-        reward_compute_type = reward_config['type']
+        reward_compute_type = reward_config['compute_type']
         if reward_compute_type == 'single':  # 单一返回值
             for reward_name in reward_config['names']:
                 reward_val_t = environment.retrieve_reward_by(reward_type=reward_config['types'][reward_name],

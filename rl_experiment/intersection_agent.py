@@ -66,3 +66,11 @@ class IntersectionAgent:
                                                                      post_state=post_state,
                                                                      reward=reward,
                                                                      neighbors_q=neighbors_q)
+
+    def update_q_table_sarsa(self, prev_state, prev_action, next_state, next_action, reward):
+        """ update q table 根据SARSA算法计算Q值"""
+        self.reinforcement_learning.update_q_table_sarsa(prev_state=prev_state,
+                                                         prev_action=prev_action,
+                                                         next_state=next_state,
+                                                         next_action=next_action,
+                                                         reward=reward)
