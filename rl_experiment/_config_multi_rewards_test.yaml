@@ -2,8 +2,8 @@ environment_settings:
   sumo_start_config: ["sumo-gui", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
   sumo_start_config_cmd: ["sumo", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
   runtime_type: gui
-  pre_steps: 9
-  simulation_time: 10
+  pre_steps: 900
+  simulation_time: 100
   data_save_type: pickle
   data_save_filepath: ["test_data.pickle"]
 net_game_settings:
@@ -40,7 +40,7 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
-      compute_type: 'single' # 'weighted' or 'compound'
+      type: 'single' # 'weighted' or 'compound'
       names: ['路口总等待时间']
       types: {
         '路口总等待时间': 'sum_waiting_time',
@@ -89,6 +89,7 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
+      type: 'single' # 'weighted' or 'compound'
       names: ['路口总等待时间']
       types: {
         '路口总等待时间': 'sum_waiting_time',
@@ -137,6 +138,7 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
+      type: 'single' # 'weighted' or 'compound'
       names: ['路口总等待时间']
       types: {
         '路口总等待时间': 'sum_waiting_time',
@@ -185,6 +187,7 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
+      type: 'single' # 'weighted' or 'compound'
       names: ['路口总等待时间']
       types: {
         '路口总等待时间': 'sum_waiting_time',
@@ -233,6 +236,7 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
+      type: 'single' # 'weighted' or 'compound'
       names: ['路口总等待时间']
       types: {
         '路口总等待时间': 'sum_waiting_time',
@@ -281,6 +285,7 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
+      type: 'single' # 'weighted' or 'compound'
       names: ['路口总等待时间']
       types: {
         '路口总等待时间': 'sum_waiting_time',

@@ -11,6 +11,11 @@ while step <= 3600
 import time
 
 from static_utilities import *
+from static_utilities_states import *
+from static_utilities_actions import *
+from static_utilities_rewards import *
+from static_utilities_q import *
+
 from traffic_environment import TrafficEnvironment
 
 '''
@@ -21,7 +26,7 @@ from traffic_environment import TrafficEnvironment
 '''
 # 1.
 env_setting, net_game_setting, agent_settings, runtime_data = get_settings_from_yaml(
-    yaml_file='_config.yaml')  # to read settings info
+    yaml_file='_config_multi_rewards_test.yaml')  # to read settings info
 # 2.
 traffic_environment = TrafficEnvironment(env_setting=env_setting)  # traffic environment
 intersection_agents = initialize_agents_by(
