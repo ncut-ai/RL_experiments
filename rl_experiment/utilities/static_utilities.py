@@ -55,10 +55,10 @@ def data_collection(*args, **kwargs):  # 未完成
     args[1][args[0]]['q_vals'] = kwargs['q_vals']
 
 
-def save_data_h5py(*args, **kwargs):
+def save_data_pickle(*args, **kwargs):
     """保存数据到文件"""
     print(args[0])
-    file_name = kwargs['file_path'][0]
+    file_name = kwargs['file_path']
     data = kwargs['data']
     hf_object = open(file_name, 'wb')
     pickle.dump(data, hf_object)

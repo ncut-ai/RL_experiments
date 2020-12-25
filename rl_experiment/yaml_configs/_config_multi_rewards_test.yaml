@@ -3,9 +3,9 @@ environment_settings:
   sumo_start_config_cmd: ["sumo", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
   runtime_type: gui
   pre_steps: 9
-  simulation_time: 10
+  simulation_time: 100
   data_save_type: pickle
-  data_save_filepath: ["test_data.pickle"]
+  data_save_filepath: "test_data.pickle"
 net_game_settings:
   model: 'PDG'
   agents:
@@ -40,7 +40,8 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
-      names: ['路口总等待时间']
+      compute_type: 'single' # 'weighted' or 'compound'
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -57,10 +58,11 @@ agent_settings:
           'epsilon': 0.9
         }
       action_selection:
-        model: 'eps-greedy'
+        model: 'eps_greedy'
         paras: {
-          'epsilon': 0.9
-        }
+                  'epsilon': 0.9
+               }
+
   J2:
     cross_id: J2
     states:
@@ -88,7 +90,8 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
-      names: ['路口总等待时间']
+      compute_type: 'single' # 'weighted' or 'compound'
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -105,10 +108,10 @@ agent_settings:
           'epsilon': 0.9
         }
       action_selection:
-        model: 'eps-greedy'
+        model: 'eps_greedy'
         paras: {
-          'epsilon': 0.9
-        }
+                  'epsilon': 0.9
+               }
   J3:
     cross_id: J3
     states:
@@ -136,7 +139,8 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
-      names: ['路口总等待时间']
+      compute_type: 'single' # 'weighted' or 'compound'
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -146,17 +150,17 @@ agent_settings:
     neighbors: [ 'J2', 'J6' ]
     rl_settings:
       learning_model:
-        model: 'QL'
+        model: 'QL_with_neighbors'
         paras: {
           'alpha': 0.01,
           'gamma': 0.9,
           'epsilon': 0.9
         }
       action_selection:
-        model: 'eps-greedy'
+        model: 'eps_greedy'
         paras: {
-          'epsilon': 0.9
-        }
+                  'epsilon': 0.9
+               }
   J4:
     cross_id: J4
     states:
@@ -184,7 +188,8 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
-      names: ['路口总等待时间']
+      compute_type: 'single' # 'weighted' or 'compound'
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -194,17 +199,17 @@ agent_settings:
     neighbors: [ 'J1', 'J5' ]
     rl_settings:
       learning_model:
-        model: 'QL'
+        model: 'QL_with_neighbors'
         paras: {
           'alpha': 0.01,
           'gamma': 0.9,
           'epsilon': 0.9
         }
       action_selection:
-        model: 'eps-greedy'
+        model: 'eps_greedy'
         paras: {
-          'epsilon': 0.9
-        }
+                  'epsilon': 0.9
+               }
   J5:
     cross_id: J5
     states:
@@ -232,7 +237,8 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
-      names: ['路口总等待时间']
+      compute_type: 'single' # 'weighted' or 'compound'
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -242,17 +248,17 @@ agent_settings:
     neighbors: [ 'J2', 'J4', 'J6' ]
     rl_settings:
       learning_model:
-        model: 'QL'
+        model: 'QL_with_neighbors'
         paras: {
           'alpha': 0.01,
           'gamma': 0.9,
           'epsilon': 0.9
         }
       action_selection:
-        model: 'eps-greedy'
+        model: 'eps_greedy'
         paras: {
-          'epsilon': 0.9
-        }
+                  'epsilon': 0.9
+               }
   J6:
     cross_id: J6
     states:
@@ -280,7 +286,8 @@ agent_settings:
         '切换到下一相位': '0',
       }
     rewards:
-      names: ['路口总等待时间']
+      compute_type: 'single' # 'weighted' or 'compound'
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -290,14 +297,14 @@ agent_settings:
     neighbors: [ 'J3', 'J5' ]
     rl_settings:
       learning_model:
-        model: 'QL'
+        model: 'QL_with_neighbors'
         paras: {
           'alpha': 0.01,
           'gamma': 0.9,
           'epsilon': 0.9
         }
       action_selection:
-        model: 'eps-greedy'
+        model: 'eps_greedy'
         paras: {
-          'epsilon': 0.9
-        }
+                  'epsilon': 0.9
+               }

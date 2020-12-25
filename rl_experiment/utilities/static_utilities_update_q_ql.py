@@ -1,4 +1,4 @@
-from static_utilities_q import *
+from utilities.static_utilities_q import *
 
 
 def update_q_tables(**kwargs):

@@ -1,10 +1,10 @@
 import pandas as pd
 
-from UCB import upper_confidence_bounds
-from epsilon_greedy import epsilon_greedy
-from q_learning_single_local import q_learning_local_only
-from q_learning_with_neighbors import q_learning_with_neighbors
-from sarsa import sarsa_func
+from action_selection.UCB import upper_confidence_bounds
+from action_selection.epsilon_greedy import epsilon_greedy
+from QL.q_learning_single_local import q_learning_local_only
+from QL.q_learning_with_neighbors import q_learning_with_neighbors
+from SARSA.sarsa import sarsa_func
 
 
 class ReinforcementLearning:
@@ -69,9 +69,9 @@ class ReinforcementLearning:
         self.__check_state_exist(state)
         return self.q_table.loc[state, action]
 
-    def get_q_max_by(self,state):
+    def get_q_max_by(self, state):
         """获取state对应的最大Q值"""
-        return self.q_table.loc[state,:].max()
+        return self.q_table.loc[state, :].max()
 
     def get_action_selection_model(self):
         """获得该Agent的动作选择模型"""
@@ -84,13 +84,6 @@ class ReinforcementLearning:
     def __update_q_table_by(self, state, action, q):
         """ update q table with state,action,q"""
         self.q_table.loc[state, action] = q
-
-    def __check_reward_num(self, reward):
-        """判断reward的个数"""
-        if len(reward) == 1:
-            return 'single_reward'
-        else:
-            return 'multi_rewards'
 
     def __check_state_exist(self, state):
         """检查state是否存在q table中"""
@@ -120,45 +113,41 @@ class ReinforcementLearning:
         """更新Q表，只考虑本地信息"""
         self.__check_state_exist(pre_state)
         self.__check_state_exist(post_state)
-        if self.__check_reward_num(reward) == 'single_reward':
-            # 获取参数
-            alpha = self.learning_model['paras']['alpha']
-            gamma = self.learning_model['paras']['gamma']
-            reward = list(reward.values())[0]
-            pre_q = self.q_table.loc[pre_state, action]
-            q_max_for_post_state = self.q_table.loc[post_state, :].max()
-            #
-            q_new = q_learning_local_only(alpha=alpha,
-                                          gamma=gamma,
-                                          reward=reward,
-                                          pre_q=pre_q,
-                                          q_max_for_post_state=q_max_for_post_state)
-            #
-            self.__update_q_table_by(state=pre_state, action=action, q=q_new)
-        else:
-            raise ValueError('reward value or type ERROR')
+        # 获取参数
+        alpha = self.learning_model['paras']['alpha']
+        gamma = self.learning_model['paras']['gamma']
+
+        pre_q = self.q_table.loc[pre_state, action]
+        q_max_for_post_state = self.q_table.loc[post_state, :].max()
+        #
+        q_new = q_learning_local_only(alpha=alpha,
+                                      gamma=gamma,
+                                      reward=reward,
+                                      pre_q=pre_q,
+                                      q_max_for_post_state=q_max_for_post_state)
+        #
+        self.__update_q_table_by(state=pre_state, action=action, q=q_new)
 
     def update_q_table_ql_with_neighbors(self, pre_state, action, post_state, reward, neighbors_q):
         """ update q table """
         self.__check_state_exist(pre_state)
         self.__check_state_exist(post_state)
-        if self.__check_reward_num(reward) == 'single_reward':
-            alpha = self.learning_model['paras']['alpha']
-            gamma = self.learning_model['paras']['gamma']
-            reward = list(reward.values())[0]
-            pre_q = self.get_q_value_by(pre_state,action)
-            q_max_for_post_state = self.get_q_max_by(post_state)
-            #
-            q_new = q_learning_with_neighbors(alpha=alpha,
-                                              gamma=gamma,
-                                              reward=reward,
-                                              pre_q=pre_q,
-                                              q_max_for_post_state=q_max_for_post_state,
-                                              neighbors_q=neighbors_q)
-            #
-            self.__update_q_table_by(state=pre_state, action=action, q=q_new)
-        else:
-            raise ValueError('reward value or type ERROR')
+
+        alpha = self.learning_model['paras']['alpha']
+        gamma = self.learning_model['paras']['gamma']
+
+        pre_q = self.get_q_value_by(pre_state, action)
+        q_max_for_post_state = self.get_q_max_by(post_state)
+        #
+        q_new = q_learning_with_neighbors(alpha=alpha,
+                                          gamma=gamma,
+                                          reward=reward,
+                                          pre_q=pre_q,
+                                          q_max_for_post_state=q_max_for_post_state,
+                                          neighbors_q=neighbors_q)
+        #
+        self.__update_q_table_by(state=pre_state, action=action, q=q_new)
+
 
     def update_q_table_sarsa(self, prev_state, prev_action, next_state, next_action, reward):
         """ update q table 根据SARSA算法计算Q值"""
@@ -168,10 +157,9 @@ class ReinforcementLearning:
         alpha = self.learning_model['paras']['alpha']
         gamma = self.learning_model['paras']['gamma']
         #
-        reward = list(reward.values())[0]
         #
-        prev_q = self.get_q_value_by(prev_state,prev_action)
-        next_q = self.get_q_value_by(next_state,next_action)
+        prev_q = self.get_q_value_by(prev_state, prev_action)
+        next_q = self.get_q_value_by(next_state, next_action)
         #
         q_new = sarsa_func(prev_q=prev_q, next_q=next_q, reward=reward, alpha=alpha, gamma=gamma)
         #

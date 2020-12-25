@@ -20,7 +20,8 @@
 #### 1.2.1 定义：在yaml中
 #### 1.2.2 实现
 ### 1.3 奖励
-见 2.4
+#### 1.3.1 允许的定义
+#### 1.3.2 实现
 ## 2. 主要模型
 ### 2.1 动作选择模型
 #### 2.1.1 yaml配置
@@ -64,10 +65,11 @@ paras: {
 #### 2.3.1 算法流程
 rl_main_sarsa.py
 ### 2.4 奖励计算方法
+奖励的计算结果为单一值
 a. 简单计算方法  
 <pre><code>
 compute_type: 'single'  
-names: ['路口总等待时间']
+names: '路口总等待时间'
 types: {
         '路口总等待时间': 'sum_waiting_time',
        }
@@ -79,7 +81,7 @@ b. 简单计算方法，进行等级划分
 按指标等级划分为：低、中、高
 <pre><code>
 compute_type: 'single_qualitative'  
-names: ['路口总等待时间']
+names: '路口总等待时间'
 types: {
         '路口总等待时间': 'sum_waiting_time',
        }

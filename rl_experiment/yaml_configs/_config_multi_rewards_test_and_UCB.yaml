@@ -5,7 +5,7 @@ environment_settings:
   pre_steps: 9
   simulation_time: 100
   data_save_type: pickle
-  data_save_filepath: ["test_data.pickle"]
+  data_save_filepath: "test_data.pickle"
 net_game_settings:
   model: 'PDG'
   agents:
@@ -41,7 +41,7 @@ agent_settings:
       }
     rewards:
       compute_type: 'single' # 'weighted' or 'compound'
-      names: ['路口总等待时间']
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -88,7 +88,7 @@ agent_settings:
       }
     rewards:
       compute_type: 'single' # 'weighted' or 'compound'
-      names: ['路口总等待时间']
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -135,7 +135,7 @@ agent_settings:
       }
     rewards:
       compute_type: 'single' # 'weighted' or 'compound'
-      names: ['路口总等待时间']
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -182,7 +182,7 @@ agent_settings:
       }
     rewards:
       compute_type: 'single' # 'weighted' or 'compound'
-      names: ['路口总等待时间']
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -229,7 +229,7 @@ agent_settings:
       }
     rewards:
       compute_type: 'single' # 'weighted' or 'compound'
-      names: ['路口总等待时间']
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
@@ -276,7 +276,7 @@ agent_settings:
       }
     rewards:
       compute_type: 'single' # 'weighted' or 'compound'
-      names: ['路口总等待时间']
+      names: '路口总等待时间'
       types: {
         '路口总等待时间': 'sum_waiting_time',
       }
