@@ -15,7 +15,7 @@ from utilities.static_utilities_actions import *
 from utilities.static_utilities_q import *
 from utilities.static_utilities_rewards import *
 from utilities.static_utilities_states import *
-from utilities.static_utilities_updata_q_sarsa import *
+from utilities.static_utilities_update_q_sarsa import *
 from traffic_environment import TrafficEnvironment
 
 '''
@@ -23,7 +23,7 @@ from traffic_environment import TrafficEnvironment
 '''
 # 1.
 env_setting, net_game_setting, agent_settings, runtime_data = get_settings_from_yaml(
-    yaml_file='yaml_configs/_config_multi_rewards_test_and_UCB.yaml')  # to read settings info
+    yaml_file='yaml_configs/_config_sarsa_test_and_UCB.yaml')  # to read settings info
 # 2.
 traffic_environment = TrafficEnvironment(env_setting=env_setting)  # traffic environment
 intersection_agents = initialize_agents_by(

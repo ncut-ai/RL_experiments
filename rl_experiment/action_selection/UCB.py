@@ -9,6 +9,5 @@ def upper_confidence_bounds(state, q_table, state_action_count_table):
     equation_2nd_part = np.sqrt(np.log(np.sum(state_action_count)) / state_action_count)
     equation_final_result = equation_2nd_part - q_state_action
     #
-    action_selected = np.random.choice(
-        equation_final_result[equation_final_result == np.max(equation_final_result)].index)  # np.max（）：取行方向的最大值
+    action_selected = np.random.choice(equation_final_result[equation_final_result == np.max(equation_final_result)].index)  # np.max（）：取行方向的最大值
     return action_selected

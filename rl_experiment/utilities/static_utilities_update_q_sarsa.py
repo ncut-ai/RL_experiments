@@ -13,4 +13,5 @@ def update_q_tables_sarsa(**kwargs):
                                    prev_action=prev_actions[name_id],
                                    next_state=next_states[name_id],
                                    next_action=next_actions[name_id],
+
                                    reward=rewards[name_id])

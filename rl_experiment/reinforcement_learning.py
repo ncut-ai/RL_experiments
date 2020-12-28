@@ -5,6 +5,7 @@ from action_selection.epsilon_greedy import epsilon_greedy
 from QL.q_learning_single_local import q_learning_local_only
 from QL.q_learning_with_neighbors import q_learning_with_neighbors
 from SARSA.sarsa import sarsa_func
+from ActorCritic.actor_critic import actor_critic
 
 
 class ReinforcementLearning:
@@ -162,5 +163,21 @@ class ReinforcementLearning:
         next_q = self.get_q_value_by(next_state, next_action)
         #
         q_new = sarsa_func(prev_q=prev_q, next_q=next_q, reward=reward, alpha=alpha, gamma=gamma)
+        #
+        self.__update_q_table_by(state=prev_state, action=prev_action, q=q_new)
+
+    def update_q_table_actor_critic(self, prev_state, prev_action, next_state, reward):
+        """ update q table 根据SARSA算法计算Q值"""
+        self.__check_state_exist(prev_state)
+        self.__check_state_exist(next_state)
+        #
+        alpha = self.learning_model['paras']['alpha']
+        #
+        #
+        prev_q = self.get_q_value_by(prev_state, prev_action)
+        prev_q_max = self.get_q_max_by(prev_state)
+        next_q_max = self.get_q_max_by(next_state)
+        #
+        q_new = actor_critic(prev_q=prev_q, prev_q_max=prev_q_max, next_q_max=next_q_max, reward=reward, alpha=alpha)
         #
         self.__update_q_table_by(state=prev_state, action=prev_action, q=q_new)
