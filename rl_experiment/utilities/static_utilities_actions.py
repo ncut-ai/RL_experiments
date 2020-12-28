@@ -5,12 +5,13 @@ def get_all_agents_actions_by(agents_states, agents_list):
         action_selection_model = agent.get_action_selection_model()  # 获得该Agent的动作类型
         #
         if action_selection_model == 'eps-greedy':
-            #
-            action = agent.select_action_eps_greedy(agents_states[name])  # 参数：状态
+            action = agent.select_action_eps_greedy(state=agents_states[name])  # 参数：状态
         #
-        elif action_selection_model == 'UCB':  # to be
-            #
-            action = agent.select_action_ucb(agents_states[name])
+        elif action_selection_model == 'UCB':  #
+            action = agent.select_action_ucb(state=agents_states[name])
+        #
+        elif action_selection_model == 'Boltzmann': # Softmax方法
+            action = agent.select_action_boltzmann(state=agents_states[name])
         else:
             raise Exception('there is no such a selection model')
         #

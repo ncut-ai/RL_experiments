@@ -2,6 +2,7 @@ import pandas as pd
 
 from action_selection.UCB import upper_confidence_bounds
 from action_selection.epsilon_greedy import epsilon_greedy
+from action_selection.boltzmann import boltzmann
 from QL.q_learning_single_local import q_learning_local_only
 from QL.q_learning_with_neighbors import q_learning_with_neighbors
 from SARSA.sarsa import sarsa_func
@@ -64,6 +65,15 @@ class ReinforcementLearning:
         self.__add_to_state_action_count_table_by(state=state, action=action_selected)
         # 返回
         return action_selected
+
+    def select_action_boltzmann(self,state):
+        """Boltzmann 或 Softmax 方法"""
+        #
+        self.__check_state_exist(state)
+        # 获取参数
+        temperature = self.action_selection_model['paras']['temperature']
+        # 调用计算函数
+        return boltzmann(state=state,q_table=self.q_table,temperature=temperature)
 
     def get_q_value_by(self, state, action):
         """根据state和action读取Q值"""

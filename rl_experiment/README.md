@@ -38,6 +38,15 @@ paras: {
 model: 'UCB'
 paras: { }
 </code></pre>
+
+2. Boltzmann 
+<pre><code>
+model: 'Boltzmann'
+paras: { 
+    'temperature': 0.8
+ }
+</code></pre>
+
 ### 2.2 Q-Learning算法实现
 #### 2.2.1 算法流程
 rl_main_ql.py
