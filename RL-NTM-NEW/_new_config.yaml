@@ -1,0 +1,219 @@
+ntm_setting:
+  model: 'NTM'
+  canshu: 0.8
+agent_settings:
+  zone1:
+    id: zone1
+
+    parameters:
+      expected_flow: 100
+      max_flow: 120
+      first_flow: 0
+      whole_outflow: 0
+      whole_inflow: 0
+      current_accumulated_vehicles: 0
+
+      critical_accumulated_vehicles: 500
+      neighbors: ['zone2', 'zone3']
+      neighbors_current_accumulated_vehicles: [0, 0]
+      neighbors_critical_accumulated_vehicles: [300, 310]
+    states:
+      neighbors: ["zone2", 'zone3']
+    actions:
+      names: ["选择低等流量", "选择中等流量", "选择高等流量"]
+      types: {
+        "选择低等流量": "transmit_low_flow",
+        "选择中等流量": "transmit_normal_flow",
+        "选择高等流量": "transmit_high_flow",
+      }
+      para: {
+        '选择低等流量': 0.1,
+        '选择中等流量': 0.5,
+        '选择高等流量': 0.7,
+      }
+    rewards:
+      names: "邻居子区的饱和度"
+      retrieve_para: {
+        "高饱和度阈值": 0.9,
+        "中饱和度阈值": 0.75,
+        "低饱和度阈值": 0.5,
+      }
+    rl_settings :
+      learning_model:
+        model: 'QL_with_neighbors'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  zone2:
+    id: zone2
+
+    parameters:
+      expected_flow: 100
+      max_flow: 120
+      first_flow: 0
+      whole_outflow: 0
+      whole_inflow: 0
+      current_accumulated_vehicles: 0
+
+      critical_accumulated_vehicles: 500
+      neighbors: ['zone1', 'zone4']
+      neighbors_current_accumulated_vehicles: [0, 0]
+      neighbors_critical_accumulated_vehicles: [300, 310]
+
+    states:
+      neighbors: ["zone1", 'zone4']
+
+      para: {
+        "低供应水平阈值": 0.9,
+        "中供应水平阈值": 0.75,
+        "高供应水平阈值": 0.5,
+      }
+    actions:
+      names: ["选择低等流量", "选择中等流量", "选择高等流量"]
+      types: {
+        "选择低等流量": "transmit_low_flow",
+        "选择中等流量": "transmit_normal_flow",
+        "选择高等流量": "transmit_high_flow",
+      }
+      para: {
+        '选择低等流量': 0.1,
+        '选择中等流量': 0.5,
+        '选择高等流量': 0.7,
+      }
+    rewards:
+      names: "邻居子区的饱和度"
+
+      retrieve_para: {
+        "高饱和度阈值": 0.9,
+        "中饱和度阈值": 0.75,
+        "低饱和度阈值": 0.5,
+      }
+    rl_settings :
+      learning_model:
+        model: 'QL_with_neighbors'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  zone3:
+    id: zone3
+
+    parameters:
+      expected_flow: 100
+      max_flow: 120
+      first_flow: 0
+      whole_outflow: 0
+      whole_inflow: 0
+      current_accumulated_vehicles: 0
+
+      critical_accumulated_vehicles: 500
+      neighbors: ['zone1', 'zone4']
+      neighbors_current_accumulated_vehicles: [0, 0]
+      neighbors_critical_accumulated_vehicles: [300,310]
+
+    states:
+      neighbors: ['zone1', 'zone4']
+
+    actions:
+      names: ["选择低等流量", "选择中等流量", "选择高等流量"]
+      types: {
+        "选择低等流量": "transmit_low_flow",
+        "选择中等流量": "transmit_normal_flow",
+        "选择高等流量": "transmit_high_flow",
+      }
+      para: {
+        '选择低等流量': 0.1,
+        '选择中等流量': 0.5,
+        '选择高等流量': 0.7,
+      }
+    rewards:
+      names: "邻居子区的饱和度"
+
+      retrieve_para: {
+        "高饱和度阈值": 0.9,
+        "中饱和度阈值": 0.75,
+        "低饱和度阈值": 0.5,
+      }
+    rl_settings:
+      learning_model:
+        model: 'QL_with_neighbors'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
+  zone4:
+    id: zone4
+
+    parameters:
+      expected_flow: 100
+      max_flow: 120
+      first_flow: 0
+      whole_outflow: 0
+      whole_inflow: 0
+      current_accumulated_vehicles: 0
+
+      critical_accumulated_vehicles: 500
+      neighbors: ['zone2', 'zone3']
+      neighbors_current_accumulated_vehicles: [0, 0]
+      neighbors_critical_accumulated_vehicles: [300,310]
+
+    states:
+      neighbors: ['zone2', 'zone3']
+
+      para: {
+        "低供应水平阈值": 0.9,
+        "中供应水平阈值": 0.75,
+        "高供应水平阈值": 0.5,
+      }
+    actions:
+      names: ["选择低等流量", "选择中等流量", "选择高等流量"]
+      types: {
+        "选择低等流量": "transmit_low_flow",
+        "选择中等流量": "transmit_normal_flow",
+        "选择高等流量": "transmit_high_flow",
+      }
+      para: {
+        '选择低等流量': 0.1,
+        '选择中等流量': 0.5,
+        '选择高等流量': 0.7,
+      }
+    rewards:
+      names: "邻居子区的饱和度"
+
+      retrieve_para: {
+        "高饱和度阈值": 0.9,
+        "中饱和度阈值": 0.75,
+        "低饱和度阈值": 0.5,
+      }
+    rl_settings:
+      learning_model:
+        model: 'QL_with_neighbors'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+          'epsilon': 0.9
+        }
+      action_selection:
+        model: 'eps-greedy'
+        paras: {
+          'epsilon': 0.9
+        }
