@@ -39,7 +39,7 @@ model: 'UCB'
 paras: { }
 </code></pre>
 
-2. Boltzmann 
+3. Boltzmann 
 <pre><code>
 model: 'Boltzmann'
 paras: { 
@@ -73,7 +73,27 @@ paras: {
 ### 2.3 SARSA算法
 #### 2.3.1 算法流程
 rl_main_sarsa.py
-### 2.4 奖励计算方法
+#### yaml配置
+<pre><code>
+learning_model:
+        model: 'sarsa'
+        paras: {
+          'alpha': 0.01,
+          'gamma': 0.9,
+        }
+</code></pre>
+### 2.4 Actor-Critic算法
+#### 2.4.1 算法流程
+rl_main_actor-critic.py
+#### 2.4.2 yaml配置
+<pre><code>
+learning_model:
+        model: 'actor-critic'
+        paras: {
+          'alpha': 0.01
+        }
+</code></pre>
+### 2.5 奖励计算方法
 奖励的计算结果为单一值
 a. 简单计算方法  
 <pre><code>
