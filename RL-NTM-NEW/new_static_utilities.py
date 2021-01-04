@@ -1,5 +1,7 @@
 import yaml
+
 from new_agent import Agent
+
 
 def read_yaml(yaml_file):
     with open(yaml_file, 'rb') as f:

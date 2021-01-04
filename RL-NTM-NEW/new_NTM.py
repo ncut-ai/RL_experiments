@@ -81,11 +81,11 @@ class NTM:
         self.neighbors_current_transmit_flow[id] = zone_2_neighbors_transmit_flow
 
     def execute_action_by(self, id, action, action_config):
-        if action == '选择低等流量':
+        if action_config['types'][action] == '选择低等流量':
             self.__execute_action_transmit_low_flow(id=id)
-        elif action == '选择中等流量':
+        elif action_config['types'][action] == '选择中等流量':
             self.__execute_action_transmit_normal_flow(id=id)
-        elif action == '选择高等流量':
+        elif action_config['types'][action] == '选择高等流量':
             self.__execute_action_transmit_high_flow(id=id)
         else:
             raise Exception('there is no such action')
