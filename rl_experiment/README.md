@@ -14,14 +14,327 @@
 4. 包括Q值 update function
 ## 1. 基本定义
 ### 1.1 状态
-#### 1.1.1 定义：在yaml中
-#### 1.1.2 实现
+####1.1.1 边的排队长度
+<pre><code>
+names: ['边的排队长度']
+      types: {
+        '边的排队长度': 'queue_count'，
+      }
+      retrieve_para: {
+        '边的排队长度': 'eJ2J1',
+      }
+</code></pre>
+<pre><code>
+traci.edge.getLastStepHaltingNumber(edgeID=edge_id)
+</code></pre>
+#####1.1.2 红灯时间（未完成）
+<pre><code>
+names: ['红灯时间']
+      types: {
+        '红灯时间': 'red_time',
+      }
+      retrieve_para: {
+        '红灯时间': 'eJ2J1',  
+</code></pre>
+<pre><code>
+
+</code></pre>>
+####1.1.3 当前相位持续时间（待修改）
+<pre><code>
+names: ['当前相位持续时间']
+      types:{
+        '当前相位持续时间': 'current_phase_duration'
+      }
+      retrieve_para: {
+        '当前相位持续时间'：‘J1’，
+      }
+</code></pre>
+<pre><code>
+traci.trafficlight.getPhaseDuration(self.ID)
+</code></pre>
+####1.1.4 交通相位划分（待修改）
+<pre><code>
+names: ['相位划分']
+      types:{
+        '相位划分': 'time interval'，
+      }
+      retrieve_para: {
+        '相位划分'：‘J1’，
+</code></pre>
+<pre><code>
+traci.trafficlight.getNextSwitch()
+</code></pre>
+####1.1.5 边的平均速度
+<pre><code>
+names:['边的平均速度']
+      types:{
+        '边的平均速度': 'mean_speed'
+      }
+      retrieve_para: {
+        '边的平均速度'：‘eJ2J1’，
+      }
+</code></pre>
+<pre><code>
+traci.edge.getLastStepMeanSpeed(edge_id)
+</code></pre>
+####1.1.6 边占有率
+<pre><code>
+names: ['占有率']
+      types: {
+        '占有率': 'occupancy',
+      }
+      retrieve_para: {
+        '占有率': 'eJ2J1',
+      }
+</code></pre>
+<pre><code>
+traci.edge.getLastStepOccupancy(edgeID=edge_id)
+</code></pre>
+####1.1.7 边等待时间
+<pre><code>
+names: '等待时间'
+      types: {
+        '等待时间': 'waiting_time',
+      }
+      retrieve_para: {
+        '等待时间': 'eJ2J1',
+      }
+</code></pre>
+<pre><code>
+traci.edge.getWaitingTime(edgeID=edge_id)
+</code></pre>
+####1.1.8 边旅行时间
+<pre><code>
+names: '旅行时间'
+      types: {
+        '旅行时间': 'travel_time',
+      }
+      retrieve_para: {
+        '旅行时间': 'eJ2J1',
+      }
+</code></pre>
+<pre><code>
+traci.edge.getTravelTime(edgeID=edge_id)
+</code></pre>
+####1.1.9 边平均车辆长度
+<pre><code>
+names: ['平均车辆长度']
+      types: {
+        '平均车辆长度': 'ave_length',
+      }
+      retrieve_para: {
+        '平均车辆长度': 'eJ2J1',
+      }
+</code></pre>
+<pre><code>
+traci.edge.getLastStepLength(edge_id)
+</code></pre>
+####1.1.10 车道排队长度
+<pre><code>
+names: ['车道排队长度']
+      types: {
+        '车道排队长度': 'queue_count_lane',
+      }
+      retrieve_para: {
+        '车道排队长度': 'eJ2J1_1',
+      }
+</code></pre>
+<pre><code>
+traci.lane.getLastStepHaltingNumber(lane_id)
+</code></pre>
+####1.1.11 车道平均速度
+<pre><code>
+names:['车道平均速度']
+      types:{
+        '车道平均速度': 'mean_speed_lane'
+      }
+      retrieve_para: {
+        '车道平均速度': 'eJ2J1_id',
+</code></pre>
+<pre><code>
+traci.lane.getLastStepMeanSpeed(lane_id)
+</code></pre>
+
+####1.1.12 车道占有率
+<pre><code>
+names: ['车道占有率']
+      types: {
+        '车道占有率': 'occupancy_lane',
+      }
+      retrieve_para: {
+        '车道占有率': 'eJ2J1_1',
+      }
+</code></pre>
+<pre><code>
+traci.lane.getLastStepOccupancy(lane_id)
+</code></pre>
+####1.1.13 车道等待时间
+<pre><code>
+names: ['车道等待时间']
+      types: {
+        '车道等待时间': 'waiting_time_lane'
+      }
+      retrieve_para: {
+        '车道等待时间': 'eJ2J1_1',
+      }
+</code></pre>
+<pre><code>
+traci.lane.getWaitingTime(lane_id)
+</code></pre>
+####1.1.14 车道旅行时间
+<pre><code>
+names: ['车道旅行时间']
+      types: {
+        '车道旅行时间': 'travel_time_lane'
+      }
+      retrieve_para: {
+        '车道旅行时间': 'eJ2J1_1',
+      }
+</code></pre>
+<pre><code>
+traci.lane.getTravelTime(lane_id)
+</code></pre>
+####1.1.15 车道平均车辆长度
+<pre><code>
+names: ['车道平均车辆长度']
+      types: {
+        '车道平均车辆长度': 'ave_length_lane',
+      }
+      retrieve_para: {
+        '车道平均车辆长度': 'eJ2J1_1',
+      }
+</code></pre>
+<pre><code>
+traci.lane.getLastStepLength(lane_id)
+</code></pre>
 ### 1.2 动作
-#### 1.2.1 定义：在yaml中
-#### 1.2.2 实现
+####1.2.1 保持不变
+<pre><code>
+names: '保持不变'
+      types: {
+        '保持不变': 'keep',
+      }
+</code></pre>
+####1.2.2 变换相位
+<pre><code>
+names: 'J1路口变换到2相位'
+      types: {
+        'J1路口变换到2相位': 'switch_to_phase',
+      }
+      retrieve_para: {
+        'J1路口变换到2相位': ['J1', 2]
+      }
+</code></pre>
+<pre><code>
+traci.trafficlight.setPhase(tls_id, phase_id)
+</code></pre>
+####1.2.3 设置车道最大速度
+<pre><code>
+names: '设置最大速度'
+      types: {
+        '设置最大速度': 'set_max_speed',
+      }
+      retrieve_para: {
+        '设置最大速度': ['eJ2J1_1', 80],
+      }
+</code></pre>
+
+<pre><code>
+traci.vehicle.SetMaxSpeed(self,lanelID,speed)
+</code></pre>
+####1.2.4 设置相位持续时间（需要修改）
+<pre><code>
+names: '增加J1相位设置新的相位持续时间'
+      types: {
+        '设置新的相位持续时间': 'set_phaseDuration',
+      }
+      retrieve_para: {
+        '设置新的相位持续时间': 'J1',
+      }
+</code></pre>
+<pre><code>
+traci.edge.SetPhaseDuration(self,tlslID,phaseDuration)
+</code></pre>
+#### 1.2.5 设置车道速度
+<pre><code>
+names: '设置新的速度'
+      types: {
+        '设置新速度': 'set_new_speed',
+      }
+      retrieve_para: {
+        '设置新速度': ['eJ2J1_1', 80],
+</code></pre>
+<pre><code>
+traci.vehicle.SetSpeed(self,lanelID,speed)
+</code></pre>
+
 ### 1.3 奖励
-#### 1.3.1 允许的定义
-#### 1.3.2 实现
+#### 1.3.1 路口总等待时间
+<pre><code>
+compute_type: 'single'  
+names: ['路口总等待时间']
+types: {
+        '路口总等待时间': 'sum_waiting_time',
+       }
+retrieve_para: {
+        '路口总等待时间': [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+       }
+</code></pre>
+#### 1.3.2 路口总排队长度
+<pre><code>
+compute_type: 'single'  
+names: ['路口总排队长度']
+types: {
+        '路口总排队长度': 'sum_queue_count',
+       }
+retrieve_para: {
+        '路口总排队长度': [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+       }
+</code></pre>
+#### 1.3.3 路口总旅行时间
+<pre><code>
+compute_type: 'single'  
+names: ['路口总旅行时间']
+types: {
+        '路口总旅行时间': 'sum_travel_time',
+       }
+retrieve_para: {
+        '路口总旅行时间': [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+       }
+</code></pre>
+#### 1.3.4 路口占有率
+<pre><code>
+compute_type: 'single'  
+names: ['路口总占有率']
+types: {
+        '路口总占有率': 'sum_occupancy'
+       }
+retrieve_para: {
+        '路口总占有率': [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+       }
+</code></pre>
+#### 1.3.5 平均速度
+<pre><code>
+compute_type: 'single'  
+names: ['路口平均速度']
+types: {
+        '路口平均速度': 'ave_mean_speed'
+       }
+retrieve_para: {
+        '路口平均速度': [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+       }
+</code></pre>
+#### 1.3.6 平均车辆长度
+<pre><code>
+compute_type: 'single'  
+names: ['路口平均车辆长度']
+types: {
+        '路口平均车辆长度': 'ave_length'
+       }
+retrieve_para: {
+        '路口平均车辆长度': [ 'eDJ1J1', 'eJ2J1', 'eJ4J1', 'eJ1DJ7' ],
+       }
+</code></pre>
 ## 2. 主要模型
 ### 2.1 动作选择模型
 #### 2.1.1 yaml配置
