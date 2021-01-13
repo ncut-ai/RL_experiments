@@ -103,10 +103,10 @@ if __name__ == '__main__':
     ddd = [x, y]
     print(ddd)
 
-    #fig = px.line(df_reward, title='Life expectancy in Canada')
+    fig = px.line(df_reward, title='Life expectancy in Canada')
     #fig = px.scatter(x=x, y=y)
     #fig = px.scatter(df_reward,  y="J4")
     #fig = go.Figure(data=go.Scatter(x=x,  y=y, mode='markers'))
-    fig = px.histogram(df_q, x="J2")
+    #fig = px.histogram(df_q, x="J2")
     
     fig.show()
