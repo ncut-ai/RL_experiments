@@ -27,17 +27,17 @@ names: ['边的排队长度']
 <pre><code>
 traci.edge.getLastStepHaltingNumber(edgeID=edge_id)
 </code></pre>
-#####1.1.2 红灯时间（未完成）
+#####1.1.2 剩余相位时间
 <pre><code>
-names: ['红灯时间']
+names: ['剩余相位时间']
       types: {
-        '红灯时间': 'red_time',
+        '剩余相位时间': 'remaining_phase_duration',
       }
       retrieve_para: {
-        '红灯时间': 'eJ2J1',  
+        '剩余相位时间': 'J1',  
 </code></pre>
 <pre><code>
-
+traci.trafficlight.getNextSwitch(tlsID=junction_id) - traci.simulation.getTime()
 </code></pre>>
 ####1.1.3 当前相位持续时间（待修改）
 <pre><code>
@@ -52,17 +52,17 @@ names: ['当前相位持续时间']
 <pre><code>
 traci.trafficlight.getPhaseDuration(self.ID)
 </code></pre>
-####1.1.4 交通相位划分（待修改）
+####1.1.4 当前相位序号
 <pre><code>
-names: ['相位划分']
+names: ['当前相位序号']
       types:{
-        '相位划分': 'time interval'，
+        '当前相位序号': 'phase_id'，
       }
       retrieve_para: {
-        '相位划分'：‘J1’，
+        '当前相位序号'：‘J1’，
 </code></pre>
 <pre><code>
-traci.trafficlight.getNextSwitch()
+traci.trafficlight.getPhase(tlsID=junction_id)
 </code></pre>
 ####1.1.5 边的平均速度
 <pre><code>
@@ -208,27 +208,28 @@ names: ['车道平均车辆长度']
 traci.lane.getLastStepLength(lane_id)
 </code></pre>
 ### 1.2 动作
-####1.2.1 保持不变
+#### 1.2.1 保持不变
 <pre><code>
 names: '保持不变'
       types: {
         '保持不变': 'keep',
       }
 </code></pre>
-####1.2.2 变换相位
+#### 1.2.2 变换到指定相位
 <pre><code>
 names: 'J1路口变换到2相位'
       types: {
         'J1路口变换到2相位': 'switch_to_phase',
       }
       retrieve_para: {
-        'J1路口变换到2相位': ['J1', 2]
+        'J1路口变换到2相位': 2
       }
 </code></pre>
 <pre><code>
-traci.trafficlight.setPhase(tls_id, phase_id)
+index = int(para)
+traci.trafficlight.setPhase(tlsID=tlsID, index=index)
 </code></pre>
-####1.2.3 设置车道最大速度
+#### 1.2.3 设置车道最大速度
 <pre><code>
 names: '设置最大速度'
       types: {
@@ -242,19 +243,22 @@ names: '设置最大速度'
 <pre><code>
 traci.vehicle.SetMaxSpeed(self,lanelID,speed)
 </code></pre>
-####1.2.4 设置相位持续时间（需要修改）
+#### 1.2.4 增加当前相位持续时间
 <pre><code>
-names: '增加J1相位设置新的相位持续时间'
+names: '增加当前相位持续时间'
       types: {
-        '设置新的相位持续时间': 'set_phaseDuration',
+        '增加当前相位持续时间': 'add_phase_duration',
       }
       retrieve_para: {
-        '设置新的相位持续时间': 'J1',
+        '增加当前相位持续时间': 10,
       }
 </code></pre>
 <pre><code>
-traci.edge.SetPhaseDuration(self,tlslID,phaseDuration)
+current_phase_duration = traci.trafficlight.getPhaseDuration(tlsID=tlsID)
+traci.trafficlight.setPhaseDuration(tlsID=tlsID, phaseDuration=current_phase_duration + para)
 </code></pre>
+
+
 #### 1.2.5 设置车道速度
 <pre><code>
 names: '设置新的速度'
@@ -266,6 +270,17 @@ names: '设置新的速度'
 </code></pre>
 <pre><code>
 traci.vehicle.SetSpeed(self,lanelID,speed)
+</code></pre>
+
+#### 1.2.6 切换到下一个相位（结束当前相位）
+<pre><code>
+names: '切换到下一个相位'
+      types: {
+        '切换到下一个相位': 'switch',
+      }
+</code></pre>
+<pre><code>
+traci.trafficlight.setPhaseDuration(cross_id, 0)
 </code></pre>
 
 ### 1.3 奖励
