@@ -23,9 +23,9 @@ class TrafficEnvironment:
         if state_type == 'queue_count' or state_type == 'queue_count_edge':  # 边 上的排队长度
             return self.__retrieve_queue_count_on_edge(edge_id=paras)
         elif state_type == 'remaining_phase_duration':  # 当前相位的剩余时长
-            return self.__retrieve_remaining_phase_duration_on_edge_by(junction_id=paras)
+            return self.__retrieve_remaining_phase_duration_on_edge_by(tls_id=paras)
         elif state_type == 'phase_id':  # 当前相位的序号
-            return self.__retrieve_current_phase_id_by(junction_id=paras)
+            return self.__retrieve_current_phase_id_by(tls_id=paras)
         elif state_type == 'vehicle_number_edge':  # 边 上的车辆数
             return self.__retrieve_vehicle_number_on_edge_by(edge_id=paras)
         elif state_type == 'mean_speed_edge':  # 边 上的平均速度
@@ -55,20 +55,20 @@ class TrafficEnvironment:
         else:
             raise Exception('there is no such bizarre state type')
 
-    def execute_action_by(self, cross_id, action, action_config):
+    def execute_action_by(self, tls_id, action, action_config):
         """execute action"""
         if action_config['types'][action] == 'keep':  # 什么也不做
             pass
         elif action_config['types'][action] == 'switch':  # 切换到下一相位，不改变相序
-            self.__execute_action_switch_to_next_phase(cross_id=cross_id)
+            self.__execute_action_switch_to_next_phase(tls_id=tls_id)
         elif action_config['types'][action] == 'switch_to_phase':  # 切换到指定的相位
-            self.__execute_action_switch_to_given_phase(tlsID=cross_id, para=action_config['para'][action])
+            self.__execute_action_switch_to_given_phase(tlsID=tls_id, para=action_config['para'][action])
         elif action_config['types'][action] == 'set_max_speed_edge':  # 设置道路上的最大速度
             self.__execute_action_set_max_speed_on_edge(para=action_config['para'][action])
         elif action_config['types'][action] == 'set_max_speed_lane':  # 设置车道上的最大速度
             self.__execute_action_set_max_speed_on_lane(para=action_config['para'][action])
         elif action_config['types'][action] == 'add_phase_duration':  # 增加当前相位的时长
-            self.__execute_action_add_current_phase_duration(tlsID=cross_id, para=action_config['para'][action])
+            self.__execute_action_add_current_phase_duration(tlsID=tls_id, para=action_config['para'][action])
         else:
             raise Exception('there is no such action')
 
@@ -149,9 +149,9 @@ class TrafficEnvironment:
         current_phase_duration = traci.trafficlight.getPhaseDuration(tlsID=tlsID)
         traci.trafficlight.setPhaseDuration(tlsID=tlsID, phaseDuration=current_phase_duration + para)
 
-    def __execute_action_switch_to_next_phase(self, cross_id):
+    def __execute_action_switch_to_next_phase(self, tls_id):
         """切换到下一个相位"""
-        traci.trafficlight.setPhaseDuration(cross_id, 0)
+        traci.trafficlight.setPhaseDuration(tlsID=tls_id, phaseDuration=0)
 
     def pre_run_simulation_to_prepare(self, pre_steps):
         """ pre run simulation with doing nothing"""
@@ -161,13 +161,13 @@ class TrafficEnvironment:
         """retrieve queue count on edge"""
         return traci.edge.getLastStepHaltingNumber(edgeID=edge_id)
 
-    def __retrieve_remaining_phase_duration_on_edge_by(self, junction_id):
+    def __retrieve_remaining_phase_duration_on_edge_by(self, tls_id):
         """获取当前相位剩余绿灯时间"""
-        return traci.trafficlight.getNextSwitch(tlsID=junction_id) - traci.simulation.getTime()
+        return traci.trafficlight.getNextSwitch(tlsID=tls_id) - traci.simulation.getTime()
 
-    def __retrieve_current_phase_id_by(self, junction_id):
+    def __retrieve_current_phase_id_by(self, tls_id):
         """获取当前相位ID，序号"""
-        return traci.trafficlight.getPhase(tlsID=junction_id)
+        return traci.trafficlight.getPhase(tlsID=tls_id)
 
     def __retrieve_vehicle_number_on_edge_by(self, edge_id):
         """获取 边 上的车辆数"""

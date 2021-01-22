@@ -23,5 +23,5 @@ def get_all_agents_actions_by(agents_states, agents_list):
 def execute_actions_in_environment(environment, actions_list, agents_list):
     """在环境中执行动作"""
     for agent_id, action_name in actions_list.items():
-        environment.execute_action_by(cross_id=agent_id, action=action_name,
+        environment.execute_action_by(tls_id=agents_list[agent_id].get_tls_id(), action=action_name,
                                       action_config=agents_list[agent_id].get_action_config())

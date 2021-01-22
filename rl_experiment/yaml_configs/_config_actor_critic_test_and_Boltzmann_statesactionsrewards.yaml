@@ -15,6 +15,7 @@ net_game_settings:
 agent_settings:
   J1:
     cross_id: J1
+    tls_id: J1
     states:
       names: ['排队长度','当前相位剩余时间','当前交通相位序号','东进口边上的车辆数', '边的平均速度','边占有率','边等待时间','边旅行时间','边平均车辆长度', '东进口直行车道车辆数',
               '车道排队长度','车道平均速度','车道占有率','车道等待时间','车道旅行时间','车道平均车辆长度']
@@ -95,6 +96,7 @@ agent_settings:
          }
   J2:
     cross_id: J2
+    tls_id: J2
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -142,6 +144,7 @@ agent_settings:
          }
   J3:
     cross_id: J3
+    tls_id: J3
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -189,6 +192,7 @@ agent_settings:
          }
   J4:
     cross_id: J4
+    tls_id: J4
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -236,6 +240,7 @@ agent_settings:
          }
   J5:
     cross_id: J5
+    tls_id: J6
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -283,6 +288,7 @@ agent_settings:
          }
   J6:
     cross_id: J6
+    tls_id: J6
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {

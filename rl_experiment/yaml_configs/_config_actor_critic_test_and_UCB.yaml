@@ -15,6 +15,7 @@ net_game_settings:
 agent_settings:
   J1:
     cross_id: J1
+    tls_id: J1
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -60,6 +61,7 @@ agent_settings:
         paras: { }
   J2:
     cross_id: J2
+    tls_id: J2
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -105,6 +107,7 @@ agent_settings:
         paras: { }
   J3:
     cross_id: J3
+    tls_id: J3
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -150,6 +153,7 @@ agent_settings:
         paras: { }
   J4:
     cross_id: J4
+    tls_id: J4
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -195,6 +199,7 @@ agent_settings:
         paras: { }
   J5:
     cross_id: J5
+    tls_id: J5
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
@@ -240,6 +245,7 @@ agent_settings:
         paras: { }
   J6:
     cross_id: J6
+    tls_id: J6
     states:
       names: ['东直排队','西直排队','南直排队','北直排队']
       types: {
