@@ -26,17 +26,18 @@ def get_settings_from_yaml(yaml_file):
     env_settings = yaml_data['environment_settings']  # 仿真环境配置参数
     net_game_settings = yaml_data['net_game_settings']  # 网络博弈模型参数
     agent_settings = yaml_data['agent_settings']  # 路口Agents初始化参数
+    rl_setting = yaml_data['rl_settings']
 
     runtime_data = {}  # 用于存储运行过程中的数据
 
-    return env_settings, net_game_settings, agent_settings, runtime_data
+    return env_settings, net_game_settings, agent_settings, rl_setting, runtime_data
 
 
-def initialize_agents_by(agent_settings):
+def initialize_agents_by(agent_settings, rl_setting):
     """Initialize all intersection agents according to agent settings"""
     intersection_agents = {}
     for key, val in agent_settings.items():
-        intersection_agents[key] = IntersectionAgent(agent_setting=val)
+        intersection_agents[key] = IntersectionAgent(agent_setting=val, rl_setting=rl_setting)
     return intersection_agents
 
 

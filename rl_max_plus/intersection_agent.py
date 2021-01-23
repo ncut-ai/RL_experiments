@@ -6,7 +6,7 @@ class IntersectionAgent:
 
     """
 
-    def __init__(self, agent_setting):
+    def __init__(self, agent_setting,rl_setting):
         """Initialization"""
         print('Agent初始化……')
         self.agent_id = agent_setting['cross_id']  # agent_id denoted as cross id
@@ -17,7 +17,6 @@ class IntersectionAgent:
         self.reward_config = agent_setting['rewards']  # reward config
         self.neighbors = agent_setting['neighbors']  # neighbor agents' names
         #
-        rl_setting = agent_setting['rl_settings']  # 强化学习模型
         self.reinforcement_learning = ReinforcementLearning(rl_setting=rl_setting,
                                                             state_names=self.state_config['names'],
                                                             action_names=self.action_config['names'])
