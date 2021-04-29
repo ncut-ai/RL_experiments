@@ -1,0 +1,53 @@
+environment_settings:
+  sumo_start_config: ["sumo-gui", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
+  sumo_start_config_cmd: ["sumo", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
+  runtime_type: gui
+  pre_steps: 10
+  data_save_type: pickle
+  data_save_filepath: "test_data.pickle"
+dqn_settings:
+  episode_num: 2000
+  step_size: 3600
+  epsilon: 0.9
+  epsilon_decay: 0.005
+  epsilon_min: 0.6
+  gamma: 0.9  # discounted factor
+  alpha: 0.01 # learning rate
+  memory_size: 1000
+  batch_size: 200
+agent_settings:
+  cross_ids: ['J1','J2','J3','J4','J5','J6']
+  tls_ids: {
+    'J1': 'tsl_1',
+    'J2': 'tsl_2',
+    'J3': 'tsl_3',
+    'J4': 'tsl_4',
+    'J5': 'tsl_5',
+    'J6': 'tsl_6'
+  }
+  states:
+      names: ['东直排队','西直排队','南直排队','北直排队']
+      types: {
+        '东直排队': 'queue_count',
+        '西直排队': 'queue_count',
+        '南直排队': 'queue_count',
+        '北直排队': 'queue_count'
+      }
+      retrieve_para: {
+        '东直排队': 'eJ2J1',
+        '西直排队': 'eDJ7J1',
+        '南直排队': 'eJ4J1',
+        '北直排队': 'eDJ1J1'
+      }
+  actions:
+      names: ['保持相位', '切换到下一相位']
+      types: {
+        '保持相位': 'keep',
+        '切换到下一相位': 'switch',
+      }
+      para: {
+        '保持相位': '-1',
+        '切换到下一相位': '0',
+      }
+  rewards:
+      
