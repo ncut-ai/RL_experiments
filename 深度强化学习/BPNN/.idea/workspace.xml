@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="043fce3f-4cc7-4fbf-b132-40ddf582ee2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_tensorflow+Keras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mayai2networkx.py" beforeDir="false" afterPath="$PROJECT_DIR$/mayai2networkx.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +33,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.test_tensorflow+Keras">
+  <component name="RunManager" selected="Python.mayai2networkx">
     <configuration name="MLP_sklearn" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BPNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -121,8 +120,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_tensorflow+Keras" />
         <item itemvalue="Python.mayai2networkx" />
+        <item itemvalue="Python.test_tensorflow+Keras" />
         <item itemvalue="Python.keras_deep_learning" />
         <item itemvalue="Python.MLP_sklearn" />
       </list>
@@ -162,22 +161,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1619582474024" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1620385793394">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1620722993837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620385793394" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1620385793394">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620722993837" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1620722993837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620385793394" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1620385793394">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620722993837" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1620722993836">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620385793394" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1620385793394">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620722993836" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1620722993837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620385793394" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620722993837" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1619175081959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

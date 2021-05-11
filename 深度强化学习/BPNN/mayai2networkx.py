@@ -5,8 +5,11 @@ from mayavi import mlab
 # some graphs to try
 # H=nx.krackhardt_kite_graph()
 # H=nx.Graph();H.add_edge('a','b');H.add_edge('a','c');H.add_edge('a','d')
-H=nx.grid_2d_graph(4,5)
+#H=nx.grid_2d_graph(3,3)
 # H = nx.cycle_graph(20)
+#H=nx.erdos_renyi_graph(1000,0.005,directed=True)
+#H=nx.barabasi_albert_graph(1000, 3)
+H=nx.watts_strogatz_graph(1000,2,0.02)
 
 
 # reorder nodes from 0,len(G)-1
