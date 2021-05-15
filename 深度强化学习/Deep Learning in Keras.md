@@ -28,7 +28,7 @@ $$
 $$
 , which renders the output between 0 and 1 as shown in the following illustration. 
 
-![activation_function_sigmoid](C:\Users\10539\Documents\My Python\神经网络\activation_function_sigmoid.png)
+![activation_function_sigmoid](activation_function_sigmoid.png)
 
 ### 3.2. ReLU Activation Function
 
@@ -51,7 +51,7 @@ f(z)=z;	& \text{when $z>0$}\\
 f(z)=\propto z;	& \text{when $z<0$ and where $\propto$ is a parameter that is defined as a small constant, say 0.005}
 \end{cases}
 $$
-![activation_function_leaky_relu](C:\Users\10539\Documents\My Python\神经网络\activation_function_leaky_relu.png)
+![activation_function_leaky_relu](activation_function_leaky_relu.png)
 
 ## 4. Model
 
@@ -149,7 +149,7 @@ Based on the type of data outcome, we have several standard loss functions defin
   - The mathematical equivalent would be :
     $$
     \sum_{n=1}^k\frac{(Actual-Predicted)^2}{k}
-	$$
+	  $$
   - ```python
       keras.losses.mean_squared_error(y_actual, y_pred)
       ```
@@ -325,7 +325,7 @@ model.fit(x_train, y_train, batch_size=64, epochs=3, validation_data=(x_val,y_va
 
 The output while training the model is showcased in the following:
 
-![output_while_training](C:\Users\10539\Documents\My Python\神经网络\output_while_training.png)
+![output_while_training](output_while_training.png)
 
 We can see that after every epoch, the model prints the mean training loss and accuracy as well as the validation loss and accuracy. We can use these intermediate results to make a judgment on the model performance. In most large DL use cases, we would have several epochs for training. It is a good practice to keep a track of the model performance with the metrics we have configured at intervals to see the results after a few epochs. 
 

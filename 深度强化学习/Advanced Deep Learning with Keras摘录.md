@@ -571,3 +571,51 @@ LSTMs与GRUs的区别如图所示：
 1. new memory都是根据之前state及input进行计算，但是GRUs中有一个reset gate控制之前state的进入量，而在LSTMs里没有类似gate；
 2. 产生新的state的方式不同，LSTMs有两个不同的gate，分别是forget gate (f gate)和input gate(i gate)，而GRUs只有一种update gate(z gate)；
 3. LSTMs对新产生的state可以通过output gate(o gate)进行调节，而GRUs对输出无任何调节。
+
+```python
+import tensorflow.keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import InputLayer, Dense, SimpleRNN, Activation, Dropout, Conv1D
+from tensorflow.keras.layers import Embedding, Flatten, LSTM, GRU
+
+model.add(SimpleRNN(units=units, dropout=dropout, input_shape=input_shape))
+
+model.add(LSTM(units=units, dropout=dropout, input_shape=input_shape))
+
+model.add(GRU(units=units, dropout=dropout, input_shape=input_shape))
+```
+
+```python
+def my_rnn(vocab_size, word_index, wordvector_dimension, learning_rate, hidden_units, sequence_length):
+    model = Sequential()
+    embedding_matrix = get_embedding_matrix(vocab_size, word_index, wordvector_dimension)
+    model.add(Embedding(vocab_size, wordvector_dimension,  weights = [embedding_matrix], input_length= sequence_length, trainable= False, mask_zero= True))
+    model.add(SimpleRNN(units= hidden_units, input_shape= [None, sequence_length], return_sequences= False))
+    model.add(Dense(1, activation= 'sigmoid'))
+    adam = tf.keras.optimizers.Adam(lr= learning_rate)
+    model.compile(loss= 'binary_crossentropy', optimizer= adam, metrics= ['accuracy'])
+    print(model.summary())
+    return model
+
+def my_lstm(vocab_size, word_index, wordvector_dimension, learning_rate, hidden_units, sequence_length):
+    model = Sequential()
+    embedding_matrix = get_embedding_matrix(vocab_size, word_index, wordvector_dimension)
+    model.add(Embedding(vocab_size, wordvector_dimension, weights = [embedding_matrix], input_length= sequence_length, trainable= False, mask_zero= True))
+    model.add(LSTM(units= hidden_units, input_shape= [None, sequence_length], return_sequences= False))
+    model.add(Dense(1, activation= 'sigmoid'))
+    adam = tf.keras.optimizers.Adam(lr= learning_rate)
+    model.compile(loss= 'binary_crossentropy', optimizer= adam, metrics= ['accuracy'])
+    print(model.summary())
+    return model
+
+def my_gru(vocab_size, word_index, wordvector_dimension, learning_rate, hidden_units, sequence_length):
+    model = Sequential()
+    embedding_matrix = get_embedding_matrix(vocab_size, word_index, wordvector_dimension)
+    model.add(Embedding(vocab_size, wordvector_dimension,  weights = [embedding_matrix], input_length= sequence_length, trainable= False, mask_zero= True))
+    model.add(GRU(units= hidden_units, input_shape= [None, sequence_length], return_sequences= False))
+    model.add(Dense(1, activation= 'sigmoid'))
+    adam = tf.keras.optimizers.Adam(lr= learning_rate)
+    model.compile(loss= 'binary_crossentropy', optimizer= adam, metrics= ['accuracy'])
+    print(model.summary())
+    return model
+```
