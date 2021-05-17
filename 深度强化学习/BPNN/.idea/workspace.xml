@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="043fce3f-4cc7-4fbf-b132-40ddf582ee2d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mayai2networkx.py" beforeDir="false" afterPath="$PROJECT_DIR$/mayai2networkx.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +32,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.mayai2networkx">
+  <component name="RunManager" selected="Python.test_tensorflow+Keras">
     <configuration name="MLP_sklearn" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BPNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -120,8 +119,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.mayai2networkx" />
         <item itemvalue="Python.test_tensorflow+Keras" />
+        <item itemvalue="Python.mayai2networkx" />
         <item itemvalue="Python.keras_deep_learning" />
         <item itemvalue="Python.MLP_sklearn" />
       </list>
