@@ -20,11 +20,11 @@ import os
 import tensorflow as tf
 import keras.backend as K
 
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+#os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 msg = tf.constant('Hello, TensorFlow!')
-
 tf.print(msg)
+
 print(K.epsilon())
 print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
