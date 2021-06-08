@@ -3,5 +3,30 @@ env_settings:
   sumo_start_config_cmd: ["sumo", "-c", "./4RL-test/simple6nodes.sumocfg", '--start']
   pre_steps: 10
   simulation_time: 1000
-deep_learning_settings:
-  
+dqn_settings:
+  episodes: 2000 # a number of games we want the agent to play.
+  simulation_time: 5400
+  gamma: 0.95 # aka decay or discount rate, to calculate the future discounted reward.
+  epsilon: 1.0 # aka exploration rate, this is the rate in which an agent randomly decides its action rather than prediction.
+  epsilon_min: 0.01 # we want the agent to explore at least this amount.
+  epsilon_decay: 0.995 # #Decay multiplied with epsilon after each episode.  we want to decrease the number of explorations as it gets good at playing games.
+  learning_rate: 0.01 # Determines how much neural net learns in each iteration.
+  memory_size: 1024
+  batch_size: 218
+  action_selection:
+    type: epsilon-greedy
+    paras: {
+
+    }
+  states:
+    names: []
+    types: {}
+    paras: {}
+  actions:
+    names: []
+    types: {}
+    paras: {}
+  rewards:
+    names: []
+    types: {}
+    paras: {}
