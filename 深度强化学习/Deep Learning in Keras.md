@@ -2,7 +2,7 @@
 
 ## 1. Input Data
 
-![input_data_matrix](C:\Users\10539\Documents\My Python\神经网络\input_data_matrix.png)
+![input_data_matrix](input_data_matrix.png)
 
  Essentially,  the model understands data as “tensors”. Tensors are nothing but a generic form for vectors, or in computer engineering terms, a simple n-dimensional matrix. Data of any form is finally represented as a homogeneous numeric matrix. So, if the data is tabular, it will be a two dimensional tensor where each column represents one training sample  and the entire table/matrix will be m samples. Additionally, DL models can interpret only numeric data. Image data also needs to be transformed into an n-dimensional tensor. 
 
@@ -12,7 +12,7 @@ Lastly, it is a good practice to normalize, standardize, or scale the input valu
 
 ## 2. Neuron
 
-![a_single_neuron](C:\Users\10539\Documents\My Python\神经网络\a_single_neuron.png)
+![a_single_neuron](a_single_neuron.png)
 
 ## 3. Activation Function
 
@@ -38,7 +38,7 @@ f(z) = \max(0,z)
 $$
 , which means that if the output is positive it would output the same value, otherwise it would output 0.
 
- ![activation_function_relu](C:\Users\10539\Documents\My Python\神经网络\activation_function_relu.png)
+ ![activation_function_relu](activation_function_relu.png)
 
  The function may look linear, but it isn’t. ReLU is a valid nonlinear function and in fact works really well as an activation function. It not only improves the performance but significantly helps the number of computations to be reduced during the training phase. This is a direct result of the 0 value in the utput when z is negative, thereby deactivating the neuron.
 

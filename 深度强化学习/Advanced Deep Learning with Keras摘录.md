@@ -30,7 +30,7 @@ The examples presented in this book will require additional packages, such as  p
 
 单个感知器（或神经元）可以被想象成逻辑回归。多层感知器（MLP），是每一层上的一组多个感知器。因为输入仅单方向地向前处理，所以MLP也被称为前馈神经网络（ Feed-Forward Neural network）。MLP由三层组成——输入层、隐藏层和输出层。输入层仅接收输入，隐藏层处理输入，输出层生成结果。基本上，每一层都要训练权值。多层感知器能够学习任意非线性函数。因此，这些网络被普遍称为通用函数逼近器（Universal Function Approximator）。MLP能够学习将任何输入映射到输出的权重。通用逼近背后的主要原因之一是激活函数（activation function）。激活函数将非线性特征引入网络中，有助于网络学习输入和输出之间的复杂关系。每个神经元的输出都是输入加权和的激活。但是，如果没有激活函数会怎样呢？该网络仅学习线性函数，但不学习复杂关系，原因是：**激活函数是多层感知器的核心！**
 
-![神经网络计算原理动画](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\神经网络计算原理动画.gif)
+![神经网络计算原理动画](神经网络计算原理动画.gif)
 
 在利用MLP解决图像分类问题时，首先要将二维图像转换成一维向量，然后再对模型进行训练。这样做有两个缺点：（1）随着图像尺寸的增大，可训练参数的数量会急剧增加。（2）MLP会丢失图像的空间特征。空间特征指的是图像中像素的排列。
 
@@ -40,19 +40,19 @@ The examples presented in this book will require additional packages, such as  p
 
 MLP隐藏层上的环形约束转向RNN。RNN在隐藏状态上有一个循环连接，此循环约束能够确保在输入数据中捕捉到顺序信息。
 
-![RNN基本结构](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\RNN基本结构.png)
+![RNN基本结构](RNN基本结构.png)
 
 RNN能够捕捉数据中出现的顺序信息，例如，预测时文本中单词之间的依赖关系：每个时间步长的输出（o1, o2, o3, o4）不仅取决于当前单词，还取决于先前的单词。
 
-![RNN-文本顺序](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\RNN-文本顺序.gif)
+![RNN-文本顺序](RNN-文本顺序.gif)
 
 RNN跨不同的时间步长共享参数。这通常被称为参数共享（Parameter Sharing）。这将减少训练参数并降低计算成本。如图所示，U、W、V 这3个权值矩阵是所有时间步长中共享的权值矩阵。
 
-![RNN-展开的RNN](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\RNN-展开的RNN.jpeg)
+![RNN-展开的RNN](RNN-展开的RNN.jpeg)
 
 深度RNN（具有大量时间步长的RNN）也存在梯度消失和爆炸问题，这是在所有不同类型神经网络中常见的问题。如图所示，在最后一个时间步长处计算的梯度在到达初始时间步长时消失。
 
-![RNN-梯度消失](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\RNN-梯度消失.png)
+![RNN-梯度消失](RNN-梯度消失.png)
 
 #### 卷积神经网络（CNN）
 
@@ -60,7 +60,7 @@ RNN跨不同的时间步长共享参数。这通常被称为参数共享（Param
 
 CNN的构建块是过滤器，也就是内核。内核的作用是利用卷积运算从输入中提取相关特征。我们可以试着了解一下使用图像作为输入数据的过滤器的重要性。将图像与过滤器进行卷积会生成一个特征图（feature map）：
 
-![CNN-卷积的输出](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\CNN-卷积的输出.jpeg)
+![CNN-卷积的输出](CNN-卷积的输出.jpeg)
 
 尽管引入卷积神经网络的初衷是要解决与图像数据相关的问题，但它们在顺序输入上的表现也十分出色。
 
@@ -70,7 +70,7 @@ CNN从图像中捕捉空间特征（spatial features）。空间特征指的是�
 
 #### 总结
 
-![三者的区别](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\三者的区别.png)
+![三者的区别](三者的区别.png)
 
 DNN指的是包含多个隐层的神经网络，如图1所示，根据神经元的特点，可以分为MLP、CNN、RNN等，下文在区分三者的时候，都从神经元的角度来讲解。MLP是最朴素的DNN，CNN是encode了空间相关性的DNN，RNN是encode进了时间相关性的DNN。
 
@@ -148,15 +148,15 @@ plt.close('all')
 
 MNIST数据是2D张量，需要根据输入类型进行reshaped。
 
-![MNIST数据reshaped](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\MNIST数据reshaped.png)
+![MNIST数据reshaped](MNIST数据reshaped.png)
 
 如图，3*3的数据被reshape成符合MLP、CNN、RNN要求的输入数据。
 
 ## 3. MLP分类器实现
 
-![MLP-MNIST分类器模型](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\MLP-MNIST分类器模型.png)
+![MLP-MNIST分类器模型](MLP-MNIST分类器模型.png)
 
-![MLP-MNIST分类器模型2](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\MLP-MNIST分类器模型2.png)
+![MLP-MNIST分类器模型2](MLP-MNIST分类器模型2.png)
 
 ```Python
 import numpy as np
@@ -213,11 +213,11 @@ print("\nTest accuracy: %.1f%%" % (100.0 * acc))
 
 由于Dense层是线性操作，一系列Dense层仅可逼近线性函数。在Dense层之间插入*relu*激活函数可以使MLP具有非线性映射功能。*relu*或**线性整流函数**（Rectified Linear Unit, **ReLU**），又称**修正线性单元，**是一种人工神经网络中常用的激活函数（activation function），通常指代以斜坡函数及其变种为代表的非线性函数。ReLU像一个过滤器，使正输入通过不发生改变，其他的归零。
 
-![ReLU函数](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\ReLU函数.png)
+![ReLU函数](ReLU函数.png)
 
 其他的非线性函数如：elu，selu，softplus，sigmoid，tanh等。然而，ReLU由于简便而在深度学习领域应用最广泛。
 
-![常见的非线性激活函数](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\常见的非线性激活函数.png)
+![常见的非线性激活函数](常见的非线性激活函数.png)
 
 *Dropout*层是一种可以用于减少神经网络过拟合的结构。Dropout则是在每一个batch的训练当中随机减掉一些神经元。因为越大的神经网络就越有可能产生过拟合，因此随机删除一些神经元就可以防止其过拟合了，也就是让拟合的结果没那么准确。神经元个数较多，容易产生过拟合，因此将其加上dropout的结构，而后面神经元个数较少的地方就不用加了。
 
@@ -232,11 +232,11 @@ model.add(Dense(hidden_units, kernel_regularizer=l2(0.001), input_dim=input_size
 
 输出层的激活函数采用*softmax*。
 
-![softmax函数](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\softmax函数.png)
+![softmax函数](softmax函数.png)
 
 其他的输出层激活函数有：linear，sigmoid（logistic sigmoid），tanh。
 
-![sigmoid和tanh](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\sigmoid和tanh.png)
+![sigmoid和tanh](sigmoid和tanh.png)
 
 常用的损失函数之一是均方差*mean_squared_error，mse*，还有交叉熵损失函数categorical_crossentropy，mean_absolute_error, binary_crossentropy。For classification by category, categorical_crossentropy or mean_squared_error is a good choice after the softmax activation layer. The  binary_crossentropy loss function is normally used after the sigmoid activation  layer while mean_squared_error is an option for tanh output.
 
@@ -259,7 +259,7 @@ model.fit(x_train, y_train, epochs=20, batch_size=batch_size)
 
 下图为不同的MLP网络配置和性能评价：
 
-![MLP网络配置与性能评价](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\MLP网络配置与性能评价.png)
+![MLP网络配置与性能评价](MLP网络配置与性能评价.png)
 
 模型配置完毕后，可查看打印模型的参数：
 
@@ -270,7 +270,7 @@ plot_model(model, to_file='mlp-mnist.png', show_shapes=True)
 
 ## 4. 卷积神经网络 Convolutional neural networks (CNNs)
 
-![CNN-MNIST分类器模型](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\CNN-MNIST分类器模型.png)
+![CNN-MNIST分类器模型](CNN-MNIST分类器模型.png)
 
 与MLP模型不同，输入张量增加了新的维度（高度、宽度、通道或（图像大小，图像大小，1）=（28,28,1））。并且需要调整训练和测试数据以适应输入类型。
 
@@ -332,9 +332,9 @@ print("\nTest accuracy: %.1f%%" % (100.0 * acc))
 
 在MLP中，Dense层是标志性特征；在CNN中，卷积核的卷积操作是标志性特征。卷积层(Convolution Layer)通常用作对输入层输入数据进行特征提取，通过卷积核矩阵对原始数据中隐含关联性的一种抽象。卷积操作原理上其实是对两张像素矩阵进行点乘求和的数学操作，其中一个矩阵为输入的数据矩阵，另一个矩阵则为卷积核（滤波器或特征矩阵），求得的结果表示为原始图像中提取的特定局部特征。
 
-![CNN-卷积操作](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\CNN-卷积操作.png)
+![CNN-卷积操作](CNN-卷积操作.png)
 
-![CNN-卷积操作-计算过程](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\CNN-卷积操作-计算过程.png)
+![CNN-卷积操作-计算过程](CNN-卷积操作-计算过程.png)
 
 激活层(Activation Layer)负责对卷积层抽取的特征进行激活，由于卷积操作是由输入矩阵与卷积核矩阵进行相差的线性变化关系，需要激活层对其进行非线性的映射。激活层主要由激活函数组成，即在卷积层输出结果的基础上嵌套一个非线性函数，让输出的特征图具有非线性关系。卷积网络中通常采用ReLU来充当激活函数（还包括tanh和sigmoid等）ReLU的函数形式如公式所示，能够限制小于0的值为0,同时大于等于0的值保持不变。
 $$
@@ -369,9 +369,9 @@ $$
 |         方块模糊         | $\begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix} \times \frac{1}{9}$ |      ![box_blur](cat-boxblur.jpg)       |
 |         高斯模糊         | $\begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix} \times \frac{1}{16}$ | ![gaussian_blur](cat-blur-gaussian.jpg) |
 
-![CNN-基本参数结构](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\CNN-基本参数结构.png)
+![CNN-基本参数结构](CNN-基本参数结构.png)
 
-![CNN-网络配置与性能评价](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\CNN-网络配置与性能评价.png)
+![CNN-网络配置与性能评价](CNN-网络配置与性能评价.png)
 
 ## 5. 循环神经网络(Recurrent neural networks, RNN)
 
@@ -423,7 +423,7 @@ $$
 
   以上即为最经典的RNN结构，其输入为$x_1,x_2,x_3,x_4$，输出为$y_1,y_2,y_3,y_4$，当然实际中最大值为$y_n$，这里为了便于理解和展示，只计算4个输入和输出。从以上结构可看出，RNN结构的输入和输出等长。
 
-![RNN-MNIST分类器模型](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\RNN-MNIST分类器模型.png)
+![RNN-MNIST分类器模型](RNN-MNIST分类器模型.png)
 
 ```python
 import numpy as np
@@ -471,9 +471,9 @@ RNN与之前两个模型的区别主要有两个方面。第一，输入类型�
 
 在Keras中，SimpleRNN层是最简单的RNN。
 
-![RNN-基本参数结构](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\RNN-基本参数结构.png)
+![RNN-基本参数结构](RNN-基本参数结构.png)
 
-![RNN-网络配置与性能评价](C:\Users\10539\Documents\GitHub\RL_experiments\深度强化学习\RNN-网络配置与性能评价.png)
+![RNN-网络配置与性能评价](RNN-网络配置与性能评价.png)
 
 有一些RNN系列的深度神经网络得到了广泛应用。例如Long Short-Term Memory (LSTM)网络在机器翻译领域和智能问答领域得到了广泛应用。LSTM解决了长期依赖性问题，或记忆与当前输出相关的过去信息的问题。
 
