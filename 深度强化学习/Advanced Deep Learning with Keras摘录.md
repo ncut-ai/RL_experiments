@@ -564,7 +564,7 @@ LSTM 拥有三个门，分别是忘记层门，输入层门和输出层门，来
 
 LSTMs与GRUs的区别如图所示：
 
-![](C:\Users\10539\Documents\In_NCUT\Using Deep RL in Traffic Control\collection_Code\深度学习书稿DeepLearning-500-questions-master\ch06_循环神经网络(RNN)\img\ch6\figure_6.6.6_2.png)
+![](figure_6.6.6_2.png)
 
 从上图可以看出，二者结构十分相似，**不同在于**：
 
